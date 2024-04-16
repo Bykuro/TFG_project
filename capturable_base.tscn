@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://14bo8hf5q7rd"]
+
+[ext_resource type="Script" path="res://CapturableBase.gd" id="1_g2u56"]
+[ext_resource type="Texture2D" uid="uid://ns5voks7c5el" path="res://assets/topdown-shooter/Tilesheet/tilesheet_complete.png" id="2_88wkb"]
+[ext_resource type="PackedScene" uid="uid://m6xi0cqimmbp" path="res://Team.tscn" id="3_7sn2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ld8k"]
+size = Vector2(384, 336)
+
+[node name="CapturableBase" type="Area2D"]
+position = Vector2(603, 287)
+script = ExtResource("1_g2u56")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_4ld8k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -9.53674e-07)
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("2_88wkb")
+region_enabled = true
+region_rect = Rect2(1484, 268, 40, 40)
+
+[node name="CaptureTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Team" parent="." instance=ExtResource("3_7sn2v")]
+team = 0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="CaptureTimer" to="." method="_on_capture_timer_timeout"]

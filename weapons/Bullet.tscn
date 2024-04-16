@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds3582tcrjchy"]
+
+[ext_resource type="Script" path="res://weapons/Bullet.gd" id="1_d2ol2"]
+[ext_resource type="Texture2D" uid="uid://tw1vvy57dfs8" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="2_fege8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b4g0g"]
+size = Vector2(6, 12)
+
+[node name="Bullet" type="Area2D"]
+rotation = 1.5708
+script = ExtResource("1_d2ol2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b4g0g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fege8")
+region_enabled = true
+region_rect = Rect2(198, 46, 4, 10)
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 0.777
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]
