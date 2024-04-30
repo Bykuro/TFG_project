@@ -11,8 +11,8 @@
 size = Vector2(38, 40)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8v4ty"]
-radius = 70.0
-height = 222.0
+radius = 141.0
+height = 368.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["obstacles"]]
 script = ExtResource("1_6h3y2")
@@ -34,11 +34,11 @@ position = Vector2(25, 10)
 script = ExtResource("5_ccmm7")
 
 [node name="PlayerDetection" type="Area2D" parent="AI" groups=["enemy"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetection"]
-position = Vector2(71, 0)
+position = Vector2(126, -2.91038e-11)
 rotation = 1.5708
+scale = Vector2(1, 1.36)
 shape = SubResource("CapsuleShape2D_8v4ty")
 
 [node name="PatrolTimer" type="Timer" parent="AI"]
