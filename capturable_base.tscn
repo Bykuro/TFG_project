@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://m6xi0cqimmbp" path="res://Team.tscn" id="3_7sn2v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ld8k"]
-size = Vector2(384, 336)
+size = Vector2(400, 400)
 
 [node name="CapturableBase" type="Area2D"]
 position = Vector2(603, 287)

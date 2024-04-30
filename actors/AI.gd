@@ -29,21 +29,22 @@ var patrol_location_reached = false
 #ADVANCE STATE
 var next_base = Vector2.ZERO
 
+var pathfinding: Pathfinding
+
 func _ready():
 	set_state(State.PATROL)
 	
-
-
-
 
 func _physics_process(delta):
 	match current_state:
 		State.PATROL:
 			if not patrol_location_reached:
-				actor.velocity = actor.velocity_toward(patrol_location)
-				actor.move_and_slide() 
-				actor.rotate_toward(patrol_location)
-				if actor.has_reached_position(patrol_location):
+				var path = pathfinding.get_new_path(global_position, patrol_location)
+				if path.size() > 1: 
+					actor.velocity = actor.velocity_toward(path[1])
+					actor.rotate_toward(path[1])
+					actor.move_and_slide() 
+				else:
 					patrol_location_reached = true
 					actor.velocity = Vector2.ZERO
 					patrol_timer.start()
@@ -56,12 +57,13 @@ func _physics_process(delta):
 			else:
 				print("Engage entered, yet no weapon // player")
 		State.ADVANCE:
-			if actor.has_reached_position(next_base):
-				set_state(State.PATROL)
-			else:
-				actor.velocity = actor.velocity_toward(next_base)
+			var path = pathfinding.get_new_path(global_position, next_base)
+			if path.size() > 1: 
+				actor.velocity = actor.velocity_toward(path[1])
+				actor.rotate_toward(path[1])
 				actor.move_and_slide() 
-				actor.rotate_toward(next_base)
+			else:
+				set_state(State.PATROL)
 		_:
 			print("Error: Found non existent state in enemy")
 

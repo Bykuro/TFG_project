@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://8l3ib1q50336"]
+
+[ext_resource type="Script" path="res://UI/GUI.gd" id="1_y8l8i"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_afukn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd3pq"]
+bg_color = Color(0.192157, 0.184314, 0.196078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_detail = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpume"]
+bg_color = Color(0.572549, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_y8l8i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow"]
+material = SubResource("CanvasItemMaterial_afukn")
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_fd3pq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rpume")
+value = 75.0
+show_percentage = false

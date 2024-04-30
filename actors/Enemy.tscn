@@ -14,7 +14,7 @@ size = Vector2(38, 40)
 radius = 70.0
 height = 222.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["obstacles"]]
 script = ExtResource("1_6h3y2")
 
 [node name="Sprite" type="Sprite2D" parent="."]

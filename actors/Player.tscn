@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh8h"]
 size = Vector2(38, 40)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["obstacles", "player"]]
 position = Vector2(69, 65)
 script = ExtResource("1_3oo4o")
 
@@ -27,3 +27,5 @@ shape = SubResource("RectangleShape2D_bsh8h")
 position = Vector2(25, 11)
 
 [node name="Team" parent="." instance=ExtResource("5_8p6ke")]
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="."]

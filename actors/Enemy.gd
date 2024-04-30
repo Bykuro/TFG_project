@@ -2,7 +2,10 @@ extends CharacterBody2D
 
 class_name Actor
 
+signal died
+
 const SPEED = 300.0
+@onready var collision_shape = $Hitbox
 @onready var health_stat = $Health
 @onready var ai = $AI
 @onready var weapon = $Weapon
@@ -27,4 +30,5 @@ func get_team() -> int:
 func handle_hit():
 	health_stat.health -=20
 	if health_stat.health <= 0:
+		emit_signal("died")
 		queue_free()
