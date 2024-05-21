@@ -57,6 +57,7 @@ func get_next_capturable_base():
 		
 	for i in list_of_bases:
 		var base = capturable_bases[i]
+		# base.priority
 		if team.team != base.team.team:
 			return base
 	return null
@@ -74,9 +75,9 @@ func spawn_unit(spawn_location: Vector2):
 	unit_instance.ai.pathfinding = pathfinding
 	set_unit_ai_to_advance_next_base(unit_instance)
 	
-func set_unit_ai_to_advance_next_base(unit: Actor):
+func set_unit_ai_to_advance_next_base(unit_temp: Actor):
 	if target_base != null:
-		var ai: AI = unit.ai
+		var ai: AI = unit_temp.ai
 		ai.next_base = target_base.get_random_position_within_radius()
 		ai.set_state(AI.State.ADVANCE)
 

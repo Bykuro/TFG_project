@@ -19,8 +19,8 @@ func _physics_process(_delta):
 		var velocity = direction * SPEED
 		global_position += velocity
 	
-func set_direction(direction: Vector2):
-	self.direction = direction
+func set_direction(direction_temp: Vector2):
+	self.direction = direction_temp
 	rotation += direction.angle()
 
 

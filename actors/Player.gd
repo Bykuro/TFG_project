@@ -42,7 +42,7 @@ func reload():
 
 
 func handle_hit():
-	health_stat.health -=10
+	health_stat.health -= 10
 	emit_signal("player_health_change", health_stat.health)
 	if health_stat.health <= 0:
 		player_death()
@@ -50,4 +50,10 @@ func handle_hit():
 func player_death():
 	emit_signal("player_died")
 	queue_free()
+	
+func handle_healing():
+	health_stat.health += 40
+	if health_stat.health < 100:
+		health_stat.health = 100
+	emit_signal("player_health_change", health_stat.health)
 

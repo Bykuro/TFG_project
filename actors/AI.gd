@@ -35,7 +35,7 @@ func _ready():
 	set_state(State.PATROL)
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match current_state:
 		State.PATROL:
 			if not patrol_location_reached:
@@ -68,9 +68,9 @@ func _physics_process(delta):
 			print("Error: Found non existent state in enemy")
 
 
-func initialize(actor, weapon : Weapon):
-	self.actor = actor
-	self.weapon = weapon
+func initialize(actor_temp, weapon_temp : Weapon):
+	self.actor = actor_temp
+	self.weapon = weapon_temp
 	weapon.weapon_out_of_ammo.connect(self.handle_reload)
 
 func set_state(new_state: int):

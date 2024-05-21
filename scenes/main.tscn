@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d33etxa11lcn7"]
+[gd_scene load_steps=14 format=3 uid="uid://d33etxa11lcn7"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_qmdf1"]
 [ext_resource type="Script" path="res://scenes/CapturableBaseManager.gd" id="2_j6ksm"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://14bo8hf5q7rd" path="res://capturable_base.tscn" id="5_bwaoj"]
 [ext_resource type="PackedScene" uid="uid://bysmq7bdv4bim" path="res://MapAI.tscn" id="5_cl025"]
 [ext_resource type="PackedScene" uid="uid://8l3ib1q50336" path="res://UI/GUI.tscn" id="9_h35pn"]
+[ext_resource type="PackedScene" uid="uid://bge55kbka8248" path="res://medkit.tscn" id="10_riepx"]
 [ext_resource type="Script" path="res://Pathfinding.gd" id="10_xpcxw"]
+[ext_resource type="Script" path="res://scenes/AIDirector.gd" id="11_fe53m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jdmt4"]
 texture = ExtResource("2_sj7dw")
@@ -594,3 +596,12 @@ position = Vector2(138, 280)
 position_smoothing_enabled = true
 
 [node name="GUI" parent="." instance=ExtResource("9_h35pn")]
+
+[node name="MedKit2" parent="." instance=ExtResource("10_riepx")]
+position = Vector2(1116, 539)
+
+[node name="MedKit" parent="." instance=ExtResource("10_riepx")]
+position = Vector2(598, 535)
+
+[node name="AIDirector" type="Node2D" parent="."]
+script = ExtResource("11_fe53m")

@@ -2,16 +2,17 @@ extends Area2D
 
 
 
-
 @export var neutral_color = Color(1,1,1)
 @export var player_color = Color(0.192157, 0.486275, 0.207843)
 @export var enemy_color = Color(0.337255, 0.360784, 0.643137)
 
 
-var player_unit_count = 0
 var enemy_unit_count = 0
 var team_to_capture = Team.TeamName.NEUTRAL
-
+var time_captured = 0
+@onready var capture_priority = 2 # 3 == LOW , 2 == NORMAL , 1 == HIGH
+@onready var capture_size = 3
+@onready var player_unit_count = 0
 @onready var collision_shape = $CollisionShape2D
 @onready var team = $Team
 @onready var capture_timer = $CaptureTimer
@@ -83,4 +84,7 @@ func set_team(new_team: int):
 			return
 
 func _on_capture_timer_timeout():
-	set_team(team_to_capture)
+	if team_to_capture == Team.TeamName.PLAYER and player_unit_count > 0:
+		set_team(team_to_capture)
+	elif team_to_capture == Team.TeamName.ENEMY and enemy_unit_count > 0:
+		set_team(team_to_capture)

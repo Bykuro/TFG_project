@@ -7,12 +7,12 @@ var tilemap: TileMap
 var half_cell_size: Vector2
 var used_rect: Rect2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	update_navigation_map()
 
 
-func create_navigation_map(tilemap: TileMap):
-	self.tilemap = tilemap
+func create_navigation_map(tilemap_temp: TileMap):
+	self.tilemap = tilemap_temp
 	half_cell_size = tilemap.tile_set.tile_size / 2
 	used_rect = tilemap.get_used_rect()
 	
