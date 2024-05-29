@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsfulrlrfsj12"]
+
+[ext_resource type="Script" path="res://AmmoBox.gd" id="1_sevch"]
+[ext_resource type="Texture2D" uid="uid://bs6of2p5qif17" path="res://assets/topdown-shooter/Spritesheet/spritesheet_tiles.png" id="2_ymq0r"]
+[ext_resource type="Texture2D" uid="uid://dxt7dmg7xxj8d" path="res://assets/kenney_topdowntanksredux/Vector/topdownTanks_vector.svg" id="3_b7kau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kftdf"]
+size = Vector2(65, 44)
+
+[node name="AmmoBox" type="Area2D"]
+script = ExtResource("1_sevch")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ymq0r")
+region_enabled = true
+region_rect = Rect2(1776, 1342, 64, 44)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-6, 0)
+texture = ExtResource("3_b7kau")
+region_enabled = true
+region_rect = Rect2(122, 244, 4, 10)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D2"]
+position = Vector2(6, 0)
+texture = ExtResource("3_b7kau")
+region_enabled = true
+region_rect = Rect2(122, 244, 4, 10)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D2/Sprite2D2"]
+position = Vector2(6, 0)
+texture = ExtResource("3_b7kau")
+region_enabled = true
+region_rect = Rect2(122, 244, 4, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_kftdf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

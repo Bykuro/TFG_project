@@ -14,7 +14,19 @@ texture = ExtResource("2_ug3kb")
 region_enabled = true
 region_rect = Rect2(1776, 1342, 64, 44)
 
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_ug3kb")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_ug3kb")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_kftdf")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -50,17 +50,22 @@ func check_for_next_capturable_bases():
 		assign_next_capturable_base_to_units(next_base)
 
 
-func get_next_capturable_base():
+func get_next_capturable_base():	#Looks for next available base with the highest priority
 	var list_of_bases = range(capturable_bases.size()) 
 	if base_capture_start_order == BaseCaptureStartOrder.LAST:
 		list_of_bases = range(capturable_bases.size() - 1,  -1, -1)
 		
+	capturable_bases.sort_custom(prioritySort)
 	for i in list_of_bases:
 		var base = capturable_bases[i]
 		# base.priority
 		if team.team != base.team.team:
 			return base
 	return null
+
+func prioritySort(a, b):
+	print("HELLO")
+	return a.capture_priority <= b.capture_priority
 
 func assign_next_capturable_base_to_units(base):
 		
