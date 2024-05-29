@@ -14,7 +14,6 @@ func update(new_config):
 	config.bases_captured_player = new_config.bases_captured_player
 	config.bases_captured_enemy = new_config.bases_captured_enemy
 	adjust_enemy_spawn_rate()
-	adjust_behavior_priority()
 	adjust_item_spawn()
 	pass
 	
@@ -32,9 +31,6 @@ func adjust_enemy_spawn_rate():
 			
 	if config.enemy_per_wave < 3:
 		config.max_enemies += 2
-	pass
-
-func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders
 	pass
 	
 func adjust_item_spawn():

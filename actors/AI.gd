@@ -27,6 +27,11 @@ var actor: Actor = null
 var player: Player = null
 var weapon: Weapon = null
 
+#RAYCAST VARIABLES
+var angle_cone_of_vision = deg_to_rad(45.0)
+var max_view_distance = 800.0
+var angle_between_rays = deg_to_rad(5.0)
+
 #PATROL STATE
 var origin = Vector2.ZERO
 var patrol_location = Vector2.ZERO
@@ -37,8 +42,18 @@ var next_base = Vector2.ZERO
 
 var pathfinding: Pathfinding
 
+func generate_raycasts():
+	var ray_count = angle_cone_of_vision / angle_between_rays
+	for i in ray_count:
+		var ray := RayCast2D.new()
+		var angle = angle_between_rays * (i - ray_count / 2.0)
+		ray.target_position = Vector2.UP.rotated(angle) * max_view_distance
+		add_child(ray)
+		ray.enabled = true
+
 func _ready():
 	set_state(State.PATROL)
+	generate_raycasts()
 	
 
 func _physics_process(_delta):
@@ -72,6 +87,7 @@ func _physics_process(_delta):
 				set_state(State.PATROL)
 		_:
 			print("Error: Found non existent state in enemy")
+
 
 
 func initialize(actor_temp, weapon_temp : Weapon):
