@@ -6,10 +6,11 @@ extends Area2D
 @export var player_color = Color(0.192157, 0.486275, 0.207843)
 @export var enemy_color = Color(0.337255, 0.360784, 0.643137)
 
-
+var enemies_on_site: Array
 var enemy_unit_count = 0
 var team_to_capture = Team.TeamName.NEUTRAL
-var time_captured = 0
+var time_captured = Timer.new()
+
 @onready var capture_priority = 2 # 3 == LOW , 2 == NORMAL , 1 == HIGH
 @onready var capture_size = 3
 @onready var player_unit_count = 0
@@ -17,6 +18,10 @@ var time_captured = 0
 @onready var team = $Team
 @onready var capture_timer = $CaptureTimer
 @onready var sprite = $Sprite2D
+
+func _ready():
+	add_child(time_captured)
+	time_captured.wait_time = 300.0
 
 func get_random_position_within_radius() -> Vector2:
 	var extents = collision_shape.shape.extents
@@ -31,6 +36,7 @@ func _on_body_entered(body):
 	if body.has_method("get_team"):
 		var body_team = body.get_team()
 		if body_team == Team.TeamName.ENEMY:
+			enemies_on_site.append(body)
 			enemy_unit_count += 1
 		if body_team == Team.TeamName.PLAYER:
 			player_unit_count += 1
@@ -42,6 +48,7 @@ func _on_body_exited(body):
 	if body.has_method("get_team"):
 		var body_team = body.get_team()
 		if body_team == Team.TeamName.ENEMY:
+			enemies_on_site.erase(body)
 			enemy_unit_count -= 1
 		if body_team == Team.TeamName.PLAYER:
 			player_unit_count -= 1
@@ -57,7 +64,8 @@ func check_whether_base_can_be_captured():
 		capture_timer.stop()
 	else:
 		team_to_capture = majority_team
-		capture_timer.start()
+		if capture_timer.is_stopped():
+			capture_timer.start()
 	
 
 func get_team_majority() -> int:
@@ -71,7 +79,7 @@ func get_team_majority() -> int:
 
 func set_team(new_team: int):
 	team.team = new_team
-	GlobalSignals.emit_signal("base_captured", new_team)
+	GlobalSignals.emit_signal("base_captured", enemies_on_site)
 	match new_team:
 		Team.TeamName.NEUTRAL:
 			sprite.modulate = neutral_color
@@ -88,3 +96,4 @@ func _on_capture_timer_timeout():
 		set_team(team_to_capture)
 	elif team_to_capture == Team.TeamName.ENEMY and enemy_unit_count > 0:
 		set_team(team_to_capture)
+	time_captured.start()

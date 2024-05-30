@@ -560,20 +560,20 @@ script = ExtResource("2_j6ksm")
 [node name="CapturableBase4" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
 position = Vector2(306, 2)
 
-[node name="CapturableBase7" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
-position = Vector2(1099, 757)
-
-[node name="CapturableBase5" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
-position = Vector2(1651, 27)
+[node name="CapturableBase6" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
+position = Vector2(2188, 758)
 
 [node name="CapturableBase3" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
 position = Vector2(2204, -561)
 
+[node name="CapturableBase5" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
+position = Vector2(1651, 27)
+
+[node name="CapturableBase7" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
+position = Vector2(1099, 757)
+
 [node name="CapturableBase2" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
 position = Vector2(1110, -547)
-
-[node name="CapturableBase6" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
-position = Vector2(2188, 758)
 
 [node name="CapturableBase" parent="CapturableBaseManager" instance=ExtResource("5_bwaoj")]
 position = Vector2(3128, 12)

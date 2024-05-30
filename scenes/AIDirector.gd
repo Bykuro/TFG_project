@@ -24,7 +24,7 @@ func initialize(capturable_bases_init: Array):
 
 
 func _process(_delta):
-		
+
 	if timer_check.time_left <= 1:		#Every 5 seconds update information about game
 		get_bases_captured()
 		current_phase_update()
@@ -70,15 +70,20 @@ func adjust_capture_priority():
 		if base.team.team == Team.TeamName.PLAYER:
 			if base.capture_priority > 1:
 				base.capture_priority -= 1
-			if base.time_captured > 15:
+			if base.time_captured.wait_time - base.time_captured.time_left > 15:
 				base.capture_size += 1
 				
 		if base.team.team == Team.TeamName.ENEMY:
-			if base.time_captured > 10:
+			if base.time_captured.wait_time - base.time_captured.time_left > 10:
 				if base.capture_size > 1:
 					base.capture_size -= 1
 			if base.capture_priority < 3:
 				base.capture_priority += 1
+		if base.team.team == Team.TeamName.NEUTRAL:
+			if base.capture_size > 1:
+				base.capture_size -= 1
+			if base.capture_priority > 1:
+				base.capture_priority -= 1
 				
 	pass
 	

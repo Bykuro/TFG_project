@@ -8,7 +8,8 @@ signal state_changed(new_state)
 enum AIType{
 	CAPTURER,
 	DEFENDER,
-	SEEKER
+	SEEKER,
+	NULL
 }
 
 enum State{
@@ -21,7 +22,7 @@ enum State{
 @onready var player_detection_zone = $PlayerDetection
 @onready var patrol_timer = $PatrolTimer
 
-var type : AIType
+var type : AIType = AIType.CAPTURER
 var current_state: int = -1 : set = set_state
 var actor: Actor = null
 var player: Player = null
