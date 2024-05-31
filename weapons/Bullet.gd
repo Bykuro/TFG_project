@@ -32,3 +32,5 @@ func _on_body_entered(body):
 	if body.has_method("handle_hit"):
 		body.handle_hit()
 		queue_free()
+	if body.is_in_group("obstacles"):
+		queue_free()

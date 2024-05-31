@@ -78,7 +78,7 @@ func get_team_majority() -> int:
 
 func set_team(new_team: int):
 	team.team = new_team
-	GlobalSignals.emit_signal("base_captured", enemies_on_site)
+	GlobalSignals.emit_signal("base_captured")
 	match new_team:
 		Team.TeamName.NEUTRAL:
 			sprite.modulate = neutral_color

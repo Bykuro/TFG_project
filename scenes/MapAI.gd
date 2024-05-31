@@ -43,8 +43,8 @@ func initialize(capturable_bases_init: Array, pathfinding_init: Pathfinding, res
 	
 	check_for_next_capturable_bases_init()
 
-func handle_base_captured(enemies_on_base):
-	check_for_next_capturable_bases(enemies_on_base)
+func handle_base_captured():
+	check_for_next_capturable_bases()
 
 
 func check_for_next_capturable_bases_init():
@@ -53,7 +53,7 @@ func check_for_next_capturable_bases_init():
 		target_offensive_base = next_base
 		assign_next_capturable_base_to_units_init()
 
-func check_for_next_capturable_bases(enemies_on_base):
+func check_for_next_capturable_bases():
 	for entity in unit_container.get_children():
 		var next_base = get_next_capturable_base(entity)
 		if next_base != null:
