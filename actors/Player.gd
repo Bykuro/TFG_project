@@ -13,6 +13,9 @@ const SPEED 		= 300
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	GlobalSignals.add_ammo.connect(handle_reload)
+
 func get_input():
 	var input_dir = Input.get_vector("left","right","up","down")
 	velocity = input_dir * SPEED
@@ -26,8 +29,10 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
 		weapon.shoot()
+		GlobalSignals.emit_signal("update_ammo")
 	elif event.is_action_pressed("reload"):
 		weapon.start_reload()
+		
 
 func set_camera_transform(camera_path: NodePath):
 	camera_transform.remote_path = camera_path
@@ -56,4 +61,9 @@ func handle_healing():
 	if health_stat.health < 100:
 		health_stat.health = 100
 	emit_signal("player_health_change", health_stat.health)
+	
+func handle_reload():
+	weapon.gain_ammo()
+	GlobalSignals.emit_signal("update_ammo")
+	pass
 

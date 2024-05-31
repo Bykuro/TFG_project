@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8l3ib1q50336"]
+[gd_scene load_steps=8 format=3 uid="uid://8l3ib1q50336"]
 
 [ext_resource type="Script" path="res://UI/GUI.gd" id="1_y8l8i"]
 
@@ -20,6 +20,15 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ngigv"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_43fid"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_bkror"]
+font_size = 32
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_y8l8i")
@@ -53,7 +62,10 @@ size_flags_stretch_ratio = 4.0
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow"]
+[node name="HealthSector" type="CenterContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow/HealthSector"]
 material = SubResource("CanvasItemMaterial_afukn")
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
@@ -63,3 +75,23 @@ theme_override_styles/background = SubResource("StyleBoxFlat_fd3pq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rpume")
 value = 75.0
 show_percentage = false
+
+[node name="AmmoSector" type="HBoxContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CurrentAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSector"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_ngigv")
+
+[node name="AmmoSpacing" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSector"]
+layout_mode = 2
+text = " / "
+label_settings = SubResource("LabelSettings_43fid")
+
+[node name="MaxAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSector"]
+layout_mode = 2
+text = "20"
+label_settings = SubResource("LabelSettings_bkror")

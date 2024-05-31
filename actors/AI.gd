@@ -94,6 +94,7 @@ func _physics_process(_delta):
 func initialize(actor_temp, weapon_temp : Weapon):
 	self.actor = actor_temp
 	self.weapon = weapon_temp
+	weapon.max_ammo = 999
 	weapon.weapon_out_of_ammo.connect(self.handle_reload)
 
 func set_state(new_state: int):

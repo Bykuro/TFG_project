@@ -31,4 +31,5 @@ func handle_hit():
 	health_stat.health -=20
 	if health_stat.health <= 0:
 		emit_signal("died")
+		GlobalSignals.emit_signal("spawn_item",self.global_position)
 		queue_free()

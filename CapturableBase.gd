@@ -48,7 +48,6 @@ func _on_body_exited(body):
 	if body.has_method("get_team"):
 		var body_team = body.get_team()
 		if body_team == Team.TeamName.ENEMY:
-			enemies_on_site.erase(body)
 			enemy_unit_count -= 1
 		if body_team == Team.TeamName.PLAYER:
 			player_unit_count -= 1
@@ -88,6 +87,7 @@ func set_team(new_team: int):
 			sprite.modulate = player_color
 			return
 		Team.TeamName.ENEMY:
+			enemies_on_site.clear()
 			sprite.modulate = enemy_color
 			return
 

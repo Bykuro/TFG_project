@@ -54,7 +54,7 @@ func check_for_next_capturable_bases_init():
 		assign_next_capturable_base_to_units_init()
 
 func check_for_next_capturable_bases(enemies_on_base):
-	for entity in enemies_on_base:
+	for entity in unit_container.get_children():
 		var next_base = get_next_capturable_base(entity)
 		if next_base != null:
 			target_offensive_base = next_base
