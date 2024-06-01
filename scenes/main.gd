@@ -10,16 +10,21 @@ const player_const = preload("res://actors/Player.tscn")
 @onready var camera = $Camera2D
 @onready var gui = $GUI
 @onready var director = $AIDirector
+@onready var item_spawner = $ItemSpawner
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	GlobalSignals.bullet_fired.connect(bullet_manager.handle_bullet_spawned)
 	
-	var enemy_respawns = $EnemyRespawnPoints
+	
 	pathfinding.create_navigation_map(ground)
 	
+	var enemy_respawns = $EnemyRespawnPoints
 	var bases = capturable_base_manager.get_capturable_bases()
 	enemy_ai.initialize(bases,pathfinding,enemy_respawns.get_children())
+	
+	var item_respawn = $ItemSpawnPoints
+	item_spawner.initialize(item_respawn.get_children())
 	
 	director.initialize(bases)
 	spawn_player()

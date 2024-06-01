@@ -10,6 +10,7 @@ const SPEED 		= 300
 @onready var weapon = $Weapon
 @onready var team = $Team
 @onready var camera_transform = $CameraTransform
+var carried_meds = 2
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -32,6 +33,8 @@ func _unhandled_input(event):
 		GlobalSignals.emit_signal("update_ammo")
 	elif event.is_action_pressed("reload"):
 		weapon.start_reload()
+	elif event.is_action_pressed("medkit"):
+		handle_healing()
 		
 
 func set_camera_transform(camera_path: NodePath):
@@ -57,10 +60,17 @@ func player_death():
 	queue_free()
 	
 func handle_healing():
-	health_stat.health += 40
-	if health_stat.health < 100:
-		health_stat.health = 100
-	emit_signal("player_health_change", health_stat.health)
+	if carried_meds > 0:
+		carried_meds -= 1
+		health_stat.health += 40
+		if health_stat.health < 100:
+			health_stat.health = 100
+		emit_signal("player_health_change", health_stat.health)
+		GlobalSignals.emit_signal("medkit_action", carried_meds)
+
+func handle_pickup_medkit():
+	carried_meds +=1
+	GlobalSignals.emit_signal("medkit_action", carried_meds)
 	
 func handle_reload():
 	weapon.gain_ammo()

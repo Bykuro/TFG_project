@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://8l3ib1q50336"]
+[gd_scene load_steps=9 format=3 uid="uid://8l3ib1q50336"]
 
 [ext_resource type="Script" path="res://UI/GUI.gd" id="1_y8l8i"]
+[ext_resource type="Texture2D" uid="uid://bs6of2p5qif17" path="res://assets/topdown-shooter/Spritesheet/spritesheet_tiles.png" id="2_s5kis"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_afukn"]
 
@@ -52,6 +53,99 @@ layout_mode = 2
 [node name="TopRow" type="HBoxContainer" parent="MarginContainer/Rows"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Filler3" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Filler2" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Filler" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="MedkitSector" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Medkit3" type="HBoxContainer" parent="MarginContainer/Rows/TopRow/MedkitSector"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit3"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit3/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1776, 1342, 64, 44)
+
+[node name="Sprite2D3" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit3/Node2D"]
+rotation = 1.5708
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Sprite2D4" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit3/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Medkit2" type="HBoxContainer" parent="MarginContainer/Rows/TopRow/MedkitSector"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit2"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit2/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1776, 1342, 64, 44)
+
+[node name="Sprite2D3" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit2/Node2D"]
+rotation = 1.5708
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Sprite2D4" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit2/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Medkit1" type="HBoxContainer" parent="MarginContainer/Rows/TopRow/MedkitSector"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit1"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit1/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1776, 1342, 64, 44)
+
+[node name="Sprite2D3" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit1/Node2D"]
+rotation = 1.5708
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
+
+[node name="Sprite2D4" type="Sprite2D" parent="MarginContainer/Rows/TopRow/MedkitSector/Medkit1/Node2D"]
+texture = ExtResource("2_s5kis")
+region_enabled = true
+region_rect = Rect2(1364, 492, 28, 6)
 
 [node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
 layout_mode = 2
