@@ -33,10 +33,11 @@ func _stop_reload():
 			max_ammo -= bullets_to_reload
 	GlobalSignals.emit_signal("update_ammo")
 
-func shoot():
+func shoot(precision_value):
 	if attack_cooldown.is_stopped() and Bullet != null and mag_ammo > 0:
 		var bullet_instance = bullet.instantiate()
-		var direction = (gun_direction.global_position - end_of_gun.global_position).normalized()
+		var misdirection: Vector2 = Vector2(randf_range(-precision_value, precision_value), randf_range(-precision_value, precision_value))
+		var direction = (gun_direction.global_position - end_of_gun.global_position + misdirection).normalized()
 		GlobalSignals.emit_signal("bullet_fired", bullet_instance, end_of_gun.global_position, direction)
 		attack_cooldown.start()
 		animation_player.play("muzzle_flash")

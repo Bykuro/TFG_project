@@ -13,6 +13,7 @@ var behavior_distribution_seeker = 0.0
 #Values for bases captured per team
 var bases_captured_player = 0
 var bases_captured_enemy = 0
+var long_captured_enemy_bases = 0
 
 #Values related to items
 var item_respawn_timer = 10.0

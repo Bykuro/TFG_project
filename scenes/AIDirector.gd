@@ -113,8 +113,12 @@ func get_bases_captured():
 		var base = base_list[i]
 		if base.team.team == Team.TeamName.ENEMY:
 			config.bases_captured_enemy += 1
+			if base.time_captured.wait_time - base.time_captured.time_left > 10:
+				config.long_captured_enemy_bases += 1
 		if base.team.team == Team.TeamName.PLAYER:
 			config.bases_captured_player += 1
+			
+	
 	pass
 
 func add_enemy_death_count():

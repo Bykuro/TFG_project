@@ -29,7 +29,7 @@ func _physics_process(_delta):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
-		weapon.shoot()
+		weapon.shoot(1)
 		GlobalSignals.emit_signal("update_ammo")
 	elif event.is_action_pressed("reload"):
 		weapon.start_reload()

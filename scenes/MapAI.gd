@@ -10,7 +10,7 @@ enum BaseCaptureStartOrder {
 @export var team_name = Team.TeamName.NEUTRAL	
 @export var unit:PackedScene = null
 @export var max_units_alive = 4
-
+var enemy_per_wave = 1
 var pathfinding: Pathfinding
 var target_offensive_base = null
 var target_defensive_base = null
@@ -160,14 +160,16 @@ func handle_unit_death():
 		return
 	
 func _on_respawn_timer_timeout():
-	if unit_container.get_children().size() < max_units_alive:
-		var respawn = respawn_points[next_spawn_to_use]
-		spawn_unit(respawn.global_position)
-		next_spawn_to_use += 1
-		if next_spawn_to_use >= respawn_points.size():
-			next_spawn_to_use = 0
-		respawn_timer.start()
-		print("hello")
+	
+	for i in enemy_per_wave:
+		if unit_container.get_children().size() < max_units_alive:
+			var respawn = respawn_points[next_spawn_to_use]
+			spawn_unit(respawn.global_position)
+			next_spawn_to_use += 1
+			if next_spawn_to_use >= respawn_points.size():
+				next_spawn_to_use = 0
+			respawn_timer.start()
+			
 		
 func update_data(max_units_alive_temp, capturer_coeficient_temp, defender_coeficient_temp, seeker_coeficient_temp): #Recieve new information from Director
 	max_units_alive = max_units_alive_temp

@@ -27,7 +27,7 @@ var current_state: int = -1 : set = set_state
 var actor: Actor = null
 var player: Player = null
 var weapon: Weapon = null
-
+var precision_value = 5
 #RAYCAST VARIABLES
 var angle_cone_of_vision = deg_to_rad(45.0)
 var max_view_distance = 800.0
@@ -75,7 +75,7 @@ func _physics_process(_delta):
 				actor.rotate_toward(player.global_position)
 				var angle_to_player =  actor.global_position.direction_to(player.global_position).angle()
 				if abs(actor.rotation - angle_to_player) < 0.1:
-					weapon.shoot()
+					weapon.shoot(precision_value)
 			else:
 				print("Engage entered, yet no weapon // player")
 		State.ADVANCE:

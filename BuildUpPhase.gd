@@ -15,6 +15,7 @@ func update(new_config):
 	config.bases_captured_enemy = new_config.bases_captured_enemy
 	config.enemies_killed = new_config.enemies_killed
 	config.number_of_enemies = new_config.number_of_enemies
+	config.base_list = new_config.base_list
 	adjust_enemy_spawn_rate()
 	adjust_behavior_priority()
 	adjust_item_spawn()
@@ -39,19 +40,11 @@ func adjust_enemy_spawn_rate():
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders
-	var list_of_bases = range(config.base_list.size()) 
-	list_of_bases = range(config.base_list.size() - 1,  -1, -1)
-	var long_captured_enemy_bases = 0
-	for i in list_of_bases:
-		var base = config.base_list[i]
-		if base.team.team == Team.TeamName.ENEMY and base.time_captured > 15:
-			long_captured_enemy_bases += 1
-	
 	if config.long_captured_enemy_bases > 3 and config.behavior_distribution_defender < 1:	# If base majority is enemy, prioritize defense
 		config.behavior_distribution_defender += config.behavior_distribution_attacker/4
 		config.behavior_distribution_seeker += config.behavior_distribution_attacker/8
 		config.behavior_distribution_attacker -= config.behavior_distribution_attacker/4 + config.behavior_distribution_attacker/8
-	elif long_captured_enemy_bases < 3 and config.behavior_distribution_attacker < 1:	# If base majority is ally, prioritize offense
+	elif config.long_captured_enemy_bases < 3 and config.behavior_distribution_attacker < 1:	# If base majority is ally, prioritize offense
 		config.behavior_distribution_attacker += config.behavior_distribution_defender/4
 		config.behavior_distribution_seeker += config.behavior_distribution_defender/8
 		config.behavior_distribution_defender -= config.behavior_distribution_defender/4 + config.behavior_distribution_defender/8
