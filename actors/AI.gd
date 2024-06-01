@@ -19,13 +19,13 @@ enum State{
 }
 
 
-@onready var player_detection_zone = $PlayerDetection
+@onready var player_detection_zone = $PlayerRaycastDetection
 @onready var patrol_timer = $PatrolTimer
 
 var type : AIType = AIType.CAPTURER
 var current_state: int = -1 : set = set_state
 var actor: Actor = null
-var player: Player = null
+var player: CharacterBody2D = null
 var weapon: Weapon = null
 var precision_value = 5
 #RAYCAST VARIABLES
@@ -39,18 +39,12 @@ var patrol_location = Vector2.ZERO
 var patrol_location_reached = false
 
 #ADVANCE STATE
-var next_base = Vector2.ZERO
+var next_objective = Vector2.ZERO
 
 var pathfinding: Pathfinding
-
+var detection: Array
 func generate_raycasts():
-	var ray_count = angle_cone_of_vision / angle_between_rays
-	for i in ray_count:
-		var ray := RayCast2D.new()
-		var angle = angle_between_rays * (i - ray_count / 2.0)
-		ray.target_position = Vector2.UP.rotated(angle) * max_view_distance
-		add_child(ray)
-		ray.enabled = true
+	detection = player_detection_zone.get_children()
 
 func _ready():
 	set_state(State.PATROL)
@@ -58,6 +52,7 @@ func _ready():
 	
 
 func _physics_process(_delta):
+	detect_player()
 	match current_state:
 		State.PATROL:
 			if not patrol_location_reached:
@@ -79,7 +74,7 @@ func _physics_process(_delta):
 			else:
 				print("Engage entered, yet no weapon // player")
 		State.ADVANCE:
-			var path = pathfinding.get_new_path(global_position, next_base)
+			var path = pathfinding.get_new_path(global_position, next_objective)
 			if path.size() > 1: 
 				actor.velocity = actor.velocity_toward(path[1])
 				actor.rotate_toward(path[1])
@@ -105,33 +100,24 @@ func set_state(new_state: int):
 		patrol_timer.start()
 		patrol_location_reached = true
 	elif new_state == State.ADVANCE:
-		if actor.has_reached_position(next_base):
+		if actor.has_reached_position(next_objective):
 			set_state(State.PATROL)
 	
 	current_state = new_state
 	emit_signal("state_changed", current_state)
 
-
-
-
-func _on_player_detection_body_entered(body):
-	if body.is_in_group("player"):
-		set_state(State.ENGAGE)
-		player = body
-	
-
-
-func _on_player_detection_body_exited(body):
-	if player and body == player:
-		set_state(State.ADVANCE)
-		player = null
+func detect_player():
+	for i in detection:
+		if i.is_colliding():
+			if i.get_collider() == player:
+				set_state(State.ENGAGE)
 
 func handle_reload():
 	weapon.start_reload()
 
 
 func _on_patrol_timer_timeout():
-	var patrol_range = 200
+	var patrol_range = 150
 	var random_x = randf_range(-patrol_range, patrol_range)
 	var random_y = randf_range(-patrol_range, patrol_range)
 	patrol_location = Vector2(random_x, random_y) + origin

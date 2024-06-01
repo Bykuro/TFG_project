@@ -15,7 +15,7 @@ const player_const = preload("res://actors/Player.tscn")
 func _ready():
 	randomize()
 	GlobalSignals.bullet_fired.connect(bullet_manager.handle_bullet_spawned)
-	
+	spawn_player()
 	
 	pathfinding.create_navigation_map(ground)
 	
@@ -27,11 +27,12 @@ func _ready():
 	item_spawner.initialize(item_respawn.get_children())
 	
 	director.initialize(bases)
-	spawn_player()
+	
 
 func spawn_player():
 	var player = player_const.instantiate()
 	add_child(player)
 	player.set_camera_transform(camera.get_path())
 	gui.set_player(player)
+	enemy_ai.player_unit = player
 	

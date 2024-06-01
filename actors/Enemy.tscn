@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjyoj0jqbjx2n"]
+[gd_scene load_steps=8 format=3 uid="uid://bjyoj0jqbjx2n"]
 
 [ext_resource type="Script" path="res://actors/Enemy.gd" id="1_6h3y2"]
 [ext_resource type="Texture2D" uid="uid://bd4sjl8nof3dc" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="3_06mf4"]
@@ -9,10 +9,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh8h"]
 size = Vector2(38, 40)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8v4ty"]
-radius = 141.0
-height = 368.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["obstacles"]]
 script = ExtResource("1_6h3y2")
@@ -33,13 +29,174 @@ position = Vector2(25, 10)
 [node name="AI" type="Node2D" parent="."]
 script = ExtResource("5_ccmm7")
 
-[node name="PlayerDetection" type="Area2D" parent="AI" groups=["enemy"]]
+[node name="PlayerRaycastDetection" type="Node2D" parent="AI"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetection"]
-position = Vector2(126, -2.91038e-11)
-rotation = 1.5708
-scale = Vector2(1, 1.36)
-shape = SubResource("CapsuleShape2D_8v4ty")
+[node name="RayCast2D" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.0523599
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D3" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.10472
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D4" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.15708
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D5" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.20944
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D6" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.261799
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D7" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.314159
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D8" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.366519
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D9" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.418879
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D10" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.471239
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D11" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.523599
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D12" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.0523599
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D13" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.10472
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D14" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.15708
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D15" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.20944
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D16" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.261799
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D17" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.314159
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D18" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.366519
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D19" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.418879
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D20" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.471239
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D21" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.523599
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D22" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.14159
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D23" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.19395
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D24" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.24631
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D25" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.29867
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D26" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.35103
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D27" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.40339
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D28" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.45575
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D29" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.50811
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D30" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.56047
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D31" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.61283
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D32" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.66519
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D33" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.08923
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D34" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -3.03687
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D35" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.98451
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D36" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.93215
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D37" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.87979
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D38" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.82743
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D39" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.77507
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D40" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.72271
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D41" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.67035
+target_position = Vector2(150, 0)
+
+[node name="RayCast2D42" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -2.61799
+target_position = Vector2(150, 0)
 
 [node name="PatrolTimer" type="Timer" parent="AI"]
 wait_time = 3.0
@@ -47,6 +204,4 @@ wait_time = 3.0
 [node name="Team" parent="." instance=ExtResource("6_s40u4")]
 team = 2
 
-[connection signal="body_entered" from="AI/PlayerDetection" to="AI" method="_on_player_detection_body_entered"]
-[connection signal="body_exited" from="AI/PlayerDetection" to="AI" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="AI/PatrolTimer" to="AI" method="_on_patrol_timer_timeout"]

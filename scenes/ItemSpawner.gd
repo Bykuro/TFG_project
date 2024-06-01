@@ -6,6 +6,7 @@ extends Node2D
 var current_items
 var respawn_points_health:Array =[]
 @onready var time = $Timer
+@onready var ammo_parent = $AmmoParent
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalSignals.spawn_item.connect(item_spawner_ammo)
@@ -31,7 +32,7 @@ func item_spawner_medicine():	#Spawns at specified points of the map via timer
 	
 func item_spawner_ammo(pos):	#Spawns on enemy death
 	var box = box_ammo.instantiate()
-	self.add_child(box)
+	ammo_parent.add_child(box)
 	box.global_position = pos
 	
 	

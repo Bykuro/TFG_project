@@ -12,4 +12,6 @@ box_ammo = ExtResource("3_jy6rn")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="AmmoParent" type="Node2D" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -47,4 +47,4 @@ func shoot(precision_value):
 
 func gain_ammo():
 	max_ammo += 8
-	GlobalSignals.emit_signal("bullet_fired")
+	GlobalSignals.emit_signal("update_ammo")

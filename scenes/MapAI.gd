@@ -17,7 +17,7 @@ var target_defensive_base = null
 var capturable_bases: Array =[]
 var respawn_points:Array =[]
 var next_spawn_to_use = 0
-
+var player_unit: CharacterBody2D = null
 var defender_coeficient  = 0
 var capturer_coeficient = 1
 var seeker_coeficient = 0
@@ -131,6 +131,7 @@ func spawn_unit(spawn_location: Vector2):
 	unit_instance.global_position = spawn_location
 	unit_instance.connect("died",handle_unit_death)
 	unit_instance.ai.pathfinding = pathfinding
+	unit_instance.ai.player = player_unit
 	var random = randf_range(0.0, 1.0)
 	if random <= capturer_coeficient:
 		unit_instance.ai.type = AI.AIType.CAPTURER
@@ -142,15 +143,20 @@ func spawn_unit(spawn_location: Vector2):
 	set_unit_ai_to_advance_next_base(unit_instance)
 	
 func set_unit_ai_to_advance_next_base(unit_temp: Actor):
-	if target_offensive_base != null:
-		var ai: AI = unit_temp.ai
-		ai.next_base = target_offensive_base.get_random_position_within_radius()
-		ai.set_state(AI.State.ADVANCE)
-	
+	if unit_temp.ai.type == AI.AIType.CAPTURER:
+		if target_offensive_base != null:
+			var ai: AI = unit_temp.ai
+			ai.next_objective = target_offensive_base.get_random_position_within_radius()
+			ai.set_state(AI.State.ADVANCE)
+	elif unit_temp.ai.type == AI.AIType.DEFENDER:
+		if target_defensive_base != null:
+			var ai: AI = unit_temp.ai
+			ai.next_objective = target_defensive_base.get_random_position_within_radius()
+			ai.set_state(AI.State.ADVANCE)
 
 func set_unit_ai_to_advance_next_defensive_base(unit_temp: Actor):
 	if target_defensive_base != null:
-		unit_temp.ai.next_base = target_defensive_base.get_random_position_within_radius()
+		unit_temp.ai.next_objective = target_defensive_base.get_random_position_within_radius()
 		unit_temp.ai.set_state(AI.State.ADVANCE)
 
 func handle_unit_death():
