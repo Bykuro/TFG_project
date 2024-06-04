@@ -26,7 +26,6 @@ func initialize(capturable_bases_init: Array):
 func _process(_delta):
 
 	if timer_check.time_left <= 1:		#Every 5 seconds update information about game
-		get_bases_captured()
 		current_phase_update()
 		timer_check.start()
 	# ADD DEBUG OPTION TO VISUALIZE INFORMATION
@@ -34,17 +33,16 @@ func _process(_delta):
 
 
 func current_phase_update():
+	get_bases_captured()
 	adjust_capture_priority()
 	adjust_enemy_precision()
-	get_bases_captured()
-	current_phase.update(config)
-	
+	config = current_phase.update(config)
+	GlobalSignals.emit_signal("send_config_values", config)
 	if current_phase.check_state():
 		change_phase(current_phase.get_next_state())
 
 func change_phase(new_phase: AIPhase):
 	if current_phase != null:
-		config.update(current_phase.get_data())
 		current_phase.queue_free()
 	match new_phase:
 		AIPhase.START:
@@ -89,13 +87,15 @@ func adjust_capture_priority():
 	
 func adjust_enemy_precision():
 	if config.current_player_health >= 80 and config.precision_value > 0:
-		config.precision_value -= 0.05
+		config.precision_value -= 0.1
 	elif config.current_player_health >= 60 and config.precision_value > 0:
-		config.precision_value -= 0.025
-	elif config.current_player_health >= 40 and config.precision_value < 1 and config.carried_items > 3:
-		config.precision_value += 0.025
-	elif config.current_player_health >= 20 and config.precision_value < 1:
+		config.precision_value -= 0.75
+	elif config.current_player_health >= 40 and config.precision_value < 5 and config.carried_items >= 2:
+		config.precision_value -= 0.05
+	elif config.current_player_health >= 40 and config.precision_value < 5 and config.carried_items < 2:
 		config.precision_value += 0.05
+	elif config.current_player_health >= 20 and config.precision_value < 5:
+		config.precision_value += 0.075
 	pass
 	
 func get_data_from_player(player_health_temp, items_used_temp, carried_items_temp):

@@ -5,15 +5,13 @@ var config
 func load_data(new_config):
 	config = new_config
 	
-func get_data():
-	return config
-	
 func update(new_config):
 	config.bases_captured_player = new_config.bases_captured_player
 	config.bases_captured_enemy = new_config.bases_captured_enemy
 	adjust_enemy_spawn_rate()
 	adjust_behavior_priority()
 	adjust_item_spawn()
+	return config
 	pass
 	
 func check_state():

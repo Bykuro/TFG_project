@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var current_ammo = $MarginContainer/Rows/BottomRow/AmmoSector/CurrentAmmo
 @onready var max_ammo = $MarginContainer/Rows/BottomRow/AmmoSector/MaxAmmo
 @onready var medkits = $MarginContainer/Rows/TopRow/MedkitSector
+@onready var debug_hud = $MarginContainer/Rows/TopRow/DebugSector
 var player: Player
 
 func set_player (player_temp: Player):
@@ -14,8 +15,17 @@ func set_player (player_temp: Player):
 	player.player_health_change.connect(set_new_health_value)
 	GlobalSignals.update_ammo.connect(set_new_max_ammo_value)
 	GlobalSignals.medkit_action.connect(set_new_medkit_quantity)
-	#player.
+	GlobalSignals.send_config_values.connect(update_debug_info)
 	
+	
+	
+func _unhandled_input(event):	#Check debug key
+	if event.is_action_pressed("debug"):	#Show / Hide debug
+		pass
+
+func update_debug_info(new_config):	#update debug information
+	pass
+
 func set_new_health_value(new_health):
 	health_bar.value = new_health
 	

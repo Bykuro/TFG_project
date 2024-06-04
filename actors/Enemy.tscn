@@ -198,6 +198,30 @@ target_position = Vector2(150, 0)
 rotation = -2.61799
 target_position = Vector2(150, 0)
 
+[node name="RayCast2D43" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.698132
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D44" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 0.872665
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D45" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 1.0472
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D46" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.698132
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D47" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -0.872665
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D48" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -1.0472
+target_position = Vector2(378, -1)
+
 [node name="PatrolTimer" type="Timer" parent="AI"]
 wait_time = 3.0
 

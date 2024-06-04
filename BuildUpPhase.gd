@@ -7,9 +7,7 @@ var config
 func load_data(new_config):		#Gets current values to work with
 	config = new_config
 	
-func get_data():
-	return config
-	
+
 func update(new_config):
 	config.bases_captured_player = new_config.bases_captured_player
 	config.bases_captured_enemy = new_config.bases_captured_enemy
@@ -19,7 +17,7 @@ func update(new_config):
 	adjust_enemy_spawn_rate()
 	adjust_behavior_priority()
 	adjust_item_spawn()
-	pass
+	return config
 	
 func check_state():
 	if config.enemies_killed > config.ENEMIES_KILLED_THRESHOLD:
@@ -29,13 +27,13 @@ func get_next_state():
 	return 2
 
 func adjust_enemy_spawn_rate():
-	if config.number_of_enemies < 4 and config.respawn_timer > 1:
+	if config.number_of_enemies < 4 and config.respawn_timer > 5:
 		config.respawn_timer -= 0.1
 	if config.number_of_enemies >= config.max_enemies:
 		config.max_enemies += 1
 	if config.bases_captured_enemy <= 3:
 		config.max_enemies += 1
-		config.respawn_timer -= 0.05
+		config.respawn_timer -= 0.1
 
 	pass
 
@@ -58,6 +56,6 @@ func adjust_behavior_priority(): #Distribute between attackers, seekers & defend
 func adjust_item_spawn():
 	if config.current_player_health < 40 and config.item_respawn_timer > 5 and config.carried_items < 3:
 		config.item_respawn_timer -= 0.5
-	elif config.current_player_health > 80 and config.item_respawn_timer < 20:
+	elif config.current_player_health > 80 and config.item_respawn_timer < 15:
 		config.item_respawn_timer += 1
 	pass

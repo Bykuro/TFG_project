@@ -54,7 +54,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Filler3" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+[node name="DebugSector" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2

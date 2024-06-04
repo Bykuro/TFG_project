@@ -40,13 +40,15 @@ func initialize(capturable_bases_init: Array, pathfinding_init: Pathfinding, res
 	
 	
 	GlobalSignals.base_captured.connect(handle_base_captured)
-	
+	GlobalSignals.send_config_values.connect(get_new_values)
 	check_for_next_capturable_bases_init()
 
 func handle_base_captured():
 	check_for_next_capturable_bases()
 
-
+func get_new_values(new_config):	#Update enemy precision; enemies per wave, max enemies, enemy behavior coeficient
+	pass
+	
 func check_for_next_capturable_bases_init():
 	var next_base = get_next_capturable_base_init()
 	if next_base != null:

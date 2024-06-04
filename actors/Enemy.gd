@@ -14,6 +14,7 @@ const SPEED = 300.0
 
 func _ready():
 	ai.initialize(self, weapon)
+	
 
 func rotate_toward(location: Vector2):
 	rotation = lerp(rotation, global_position.direction_to(location).angle(), 0.05)

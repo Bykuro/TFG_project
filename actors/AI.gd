@@ -28,10 +28,6 @@ var actor: Actor = null
 var player: CharacterBody2D = null
 var weapon: Weapon = null
 var precision_value = 5
-#RAYCAST VARIABLES
-var angle_cone_of_vision = deg_to_rad(45.0)
-var max_view_distance = 800.0
-var angle_between_rays = deg_to_rad(5.0)
 
 #PATROL STATE
 var origin = Vector2.ZERO
@@ -50,7 +46,6 @@ func _ready():
 	set_state(State.PATROL)
 	generate_raycasts()
 	
-
 func _physics_process(_delta):
 	detect_player()
 	match current_state:
