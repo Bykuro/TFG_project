@@ -30,14 +30,6 @@ func adjust_enemy_spawn_rate():
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders
-	var list_of_bases = range(config.base_list.size()) 
-	list_of_bases = range(config.base_list.size() - 1,  -1, -1)
-	var long_captured_player_bases = 0
-	for i in list_of_bases:
-		var base = config.base_list[i]
-		if base.team.team == Team.TeamName.PLAYER and base.time_captured > 15:
-			long_captured_player_bases += 1
-	
 	if config.long_captured_player_bases < 3:
 		config.behavior_distribution_defender += config.behavior_distribution_attacker/8
 		config.behavior_distribution_attacker -= config.behavior_distribution_attacker/8
