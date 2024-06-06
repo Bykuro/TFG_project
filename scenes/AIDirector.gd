@@ -22,6 +22,7 @@ func initialize(capturable_bases_init: Array):
 	base_list = capturable_bases_init
 	GlobalSignals.player_health_change.connect(update_health)
 	GlobalSignals.medkit_action.connect(update_items)
+	GlobalSignals.enemy_spawned.connect(update_enemies)
 
 func update_health(new_health):
 	config.current_player_health = new_health
@@ -30,6 +31,9 @@ func update_health(new_health):
 func update_items(new_inventory):
 	config.carried_items = new_inventory
 
+func update_enemies(new_enemy_quantity):
+	config.number_of_enemies = new_enemy_quantity
+	
 func _process(_delta):
 
 	if timer_check.time_left <= 1:		#Every 5 seconds update information about game

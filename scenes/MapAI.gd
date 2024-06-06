@@ -147,6 +147,7 @@ func spawn_unit(spawn_location: Vector2):
 		unit_container.ai.type = AI.AIType.SEEKER
 	
 	set_unit_ai_to_advance_next_base(unit_instance)
+	GlobalSignals.emit_signal("enemy_spawned",unit_container.get_children().size())
 	
 func set_unit_ai_to_advance_next_base(unit_temp: Actor):
 	if unit_temp.ai.type == AI.AIType.CAPTURER:
