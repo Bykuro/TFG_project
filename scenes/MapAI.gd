@@ -47,7 +47,11 @@ func handle_base_captured():
 	check_for_next_capturable_bases()
 
 func get_new_values(new_config):	#Update enemy precision; enemies per wave, max enemies, enemy behavior coeficient
-	pass
+	capturer_coeficient = new_config.behavior_distribution_attacker
+	defender_coeficient = new_config.behavior_distribution_defender
+	seeker_coeficient = new_config.behavior_distribution_seeker
+	enemy_per_wave = new_config.enemy_per_wave
+	max_units_alive = new_config.max_enemies
 	
 func check_for_next_capturable_bases_init():
 	var next_base = get_next_capturable_base_init()

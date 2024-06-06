@@ -20,8 +20,15 @@ func initialize(capturable_bases_init: Array):
 	timer_check.wait_time = 6.0
 	timer_check.start()
 	base_list = capturable_bases_init
+	GlobalSignals.player_health_change.connect(update_health)
+	GlobalSignals.medkit_action.connect(update_items)
 
+func update_health(new_health):
+	config.current_player_health = new_health
+	pass
 
+func update_items(new_inventory):
+	config.carried_items = new_inventory
 
 func _process(_delta):
 

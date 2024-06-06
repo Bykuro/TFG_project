@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal player_died
-signal player_health_change(new_health)
+
 const SPEED 		= 300
 
 @onready var collision_shape = $Hitbox
@@ -53,7 +53,7 @@ func reload():
 func handle_hit():
 	
 	health_stat.health -= randi_range(4,10)
-	emit_signal("player_health_change", health_stat.health)
+	GlobalSignals.emit_signal("player_health_change", health_stat.health)
 	if health_stat.health <= 0:
 		player_death()
 
@@ -67,7 +67,7 @@ func handle_healing():
 		health_stat.health += 40
 		if health_stat.health > 100:
 			health_stat.health = 100
-		emit_signal("player_health_change", health_stat.health)
+		GlobalSignals.emit_signal("player_health_change", health_stat.health)
 		GlobalSignals.emit_signal("medkit_action", carried_meds)
 
 func handle_pickup_medkit():

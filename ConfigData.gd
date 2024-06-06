@@ -18,7 +18,7 @@ var long_captured_enemy_bases = 0
 #Values related to items
 var item_respawn_timer = 10.0
 var items_used = 999
-var carried_items = 0
+var carried_items = 2
 
 #Values related to enemy difficulty
 var precision_value = 1

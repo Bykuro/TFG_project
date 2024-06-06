@@ -10,10 +10,13 @@ var respawn_points_health:Array =[]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalSignals.spawn_item.connect(item_spawner_ammo)
+	GlobalSignals.send_config_values.connect(get_new_respawn_timer)
 	pass # Replace with function body.
 	time.start()
 
 
+func get_new_respawn_timer(new_config):
+	time.wait_time = new_config.respawn_timer
 
 func initialize(respawn_points_health_init: Array):
 	respawn_points_health = respawn_points_health_init

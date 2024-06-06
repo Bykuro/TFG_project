@@ -86,6 +86,10 @@ func initialize(actor_temp, weapon_temp : Weapon):
 	self.weapon = weapon_temp
 	weapon.max_ammo = 999
 	weapon.weapon_out_of_ammo.connect(self.handle_reload)
+	GlobalSignals.send_config_values.connect(get_new_precision_value)
+	
+func get_new_precision_value(new_config):
+	precision_value = new_config.precision_value
 
 func set_state(new_state: int):
 	if new_state == current_state:
