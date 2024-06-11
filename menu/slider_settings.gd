@@ -47,13 +47,13 @@ func on_value_changed(value: float):
 		"Health minimum":
 			ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT = value
 		"Enemies to kill":
-			ModifiablePlayerValues.ENEMIES_KILLED_THRESHOLD = value
+			ModifiablePlayerValues.ENEMIES_KILLED_THRESHOLD = int(value)
 		"Max enemy Quantity":
-			ModifiablePlayerValues.MAX_ENEMY_THRESHOLD = value
+			ModifiablePlayerValues.MAX_ENEMY_THRESHOLD = int(value)
 		"Enemy multiplier":
 			ModifiablePlayerValues.ENEMY_MULTIPLIER = value
 		"Max enemies per wave":
-			ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE = value
+			ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE = int(value)
 		
 	
 	

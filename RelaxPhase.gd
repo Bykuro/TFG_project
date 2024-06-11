@@ -12,7 +12,6 @@ func update(new_config):
 	adjust_behavior_priority()
 	adjust_item_spawn()
 	return config
-	pass
 	
 func check_state():
 	if config.bases_captured_player < config.PLAYER_BASE_THRESHOLD:

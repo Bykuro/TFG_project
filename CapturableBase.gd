@@ -62,12 +62,11 @@ func check_whether_base_can_be_captured():
 		team_to_capture = Team.TeamName.NEUTRAL
 		capture_timer.stop()
 	else:
-		team_to_capture = majority_team
+		team_to_capture = majority_team 
 		if capture_timer.is_stopped():
 			capture_timer.start()
-	
 
-func get_team_majority() -> int:
+func get_team_majority() -> Team.TeamName:
 		print(enemy_unit_count)
 		if enemy_unit_count == player_unit_count:
 			return Team.TeamName.NEUTRAL
