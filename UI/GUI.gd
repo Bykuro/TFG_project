@@ -26,6 +26,7 @@ func set_player (player_temp: Player):
 	GlobalSignals.update_ammo.connect(set_new_max_ammo_value)
 	GlobalSignals.medkit_action.connect(set_new_medkit_quantity)
 	GlobalSignals.send_config_values.connect(update_debug_info)
+	GlobalSignals.sendCurrentPhase.connect(update_actual_phase)
 	
 func _unhandled_input(event):	#Check debug key
 	if event.is_action_pressed("debug"):	#Show / Hide debug
@@ -38,6 +39,17 @@ func update_debug_info(new_config):	#update debug information
 	enemy_bases.text = "Enemy Bases: " + str(new_config.bases_captured_enemy)
 	respawn_timer.text = "Respawn Timer: " + str(new_config.respawn_timer)
 	pass
+
+func update_actual_phase(current_ai_phase):
+	if current_ai_phase == 0:
+		current_phase.text = "Current Phase: Start"
+	elif current_ai_phase == 1:
+		current_phase.text = "Current Phase: Buildup"
+	elif current_ai_phase == 2:
+		current_phase.text = "Current Phase: Peak"
+	elif current_ai_phase == 3:
+		current_phase.text = "Current Phase: Relax"
+			
 
 func set_new_health_value(new_health):
 	health_bar.value = new_health

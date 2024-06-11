@@ -14,7 +14,7 @@ func update(new_config):
 	return config
 	
 func check_state():
-	if config.bases_captured_player > config.PLAYER_BASE_THRESHOLD:
+	if config.bases_captured_player >= config.PLAYER_BASE_THRESHOLD:
 		return true
 	
 func get_next_state():

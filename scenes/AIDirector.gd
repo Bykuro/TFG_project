@@ -9,7 +9,7 @@ enum AIPhase {
 
 var base_list: Array
 var timer_check = Timer.new()
-var current_ai_phase : AIPhase = AIPhase.RELAX
+var current_ai_phase : AIPhase = AIPhase.START
 
 var current_phase
 var config = preload("res://ConfigData.gd").new()
@@ -24,6 +24,7 @@ func initialize(capturable_bases_init: Array):
 	GlobalSignals.medkit_action.connect(update_items)
 	GlobalSignals.enemy_spawned.connect(update_enemies)
 	GlobalSignals.emit_signal("send_config_values", config)
+	GlobalSignals.sendCurrentPhase.emit(current_ai_phase)
 
 func update_health(new_health):
 	config.current_player_health = new_health
@@ -65,7 +66,7 @@ func change_phase(new_phase: AIPhase):
 			current_phase = preload("res://PeakPhase.gd").new()
 		AIPhase.RELAX:
 			current_phase = preload("res://RelaxPhase.gd").new()
-
+	GlobalSignals.sendCurrentPhase.emit(new_phase)
 	current_phase.load_data(config)
 
 

@@ -160,11 +160,15 @@ func set_unit_ai_to_advance_next_base(unit_temp: Actor):
 			var ai: AI = unit_temp.ai
 			ai.next_objective = target_offensive_base.get_random_position_within_radius()
 			ai.set_state(AI.State.ADVANCE)
+		else:
+			print("Capturer spawned, yet no offensive base found!")
 	elif unit_temp.ai.type == AI.AIType.DEFENDER:
 		if target_defensive_base != null:
 			var ai: AI = unit_temp.ai
 			ai.next_objective = target_defensive_base.get_random_position_within_radius()
 			ai.set_state(AI.State.ADVANCE)
+		else:
+			print("Defender spawned, yet no defensive base found!")
 
 func set_unit_ai_to_advance_next_defensive_base(unit_temp: Actor):
 	if target_defensive_base != null:
