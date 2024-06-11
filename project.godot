@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="ProjectIA_TFG"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GlobalSignals="*res://globals/GlobalSignals.gd"
+ModifiablePlayerValues="*res://scenes/ModifiablePlayerValues.gd"
 
 [display]
 

@@ -23,6 +23,7 @@ func initialize(capturable_bases_init: Array):
 	GlobalSignals.player_health_change.connect(update_health)
 	GlobalSignals.medkit_action.connect(update_items)
 	GlobalSignals.enemy_spawned.connect(update_enemies)
+	GlobalSignals.emit_signal("send_config_values", config)
 
 func update_health(new_health):
 	config.current_player_health = new_health

@@ -6,6 +6,16 @@ extends CanvasLayer
 @onready var max_ammo = $MarginContainer/Rows/BottomRow/AmmoSector/MaxAmmo
 @onready var medkits = $MarginContainer/Rows/TopRow/MedkitSector
 @onready var debug_hud = $MarginContainer/Rows/TopRow/DebugSector
+
+@onready var enemy_quantity = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/EnemyQuantity
+@onready var enemy_max = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/EnemyMax
+@onready var current_phase = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/CurrentPhase
+@onready var player_bases = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/PlayerBases
+@onready var enemy_bases = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/EnemyBases
+@onready var respawn_timer = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/RespawnTimer
+
+
+
 var player: Player
 
 func set_player (player_temp: Player):
@@ -22,7 +32,11 @@ func _unhandled_input(event):	#Check debug key
 		pass
 
 func update_debug_info(new_config):	#update debug information
-	
+	enemy_quantity.text = "Current Enemies: " + str(new_config.number_of_enemies)
+	enemy_max.text = "Max Enemies: " + str(new_config.max_enemies)
+	player_bases.text = "Player Bases: " + str(new_config.bases_captured_player)
+	enemy_bases.text = "Enemy Bases: " + str(new_config.bases_captured_enemy)
+	respawn_timer.text = "Respawn Timer: " + str(new_config.respawn_timer)
 	pass
 
 func set_new_health_value(new_health):

@@ -13,28 +13,27 @@ func update(new_config):
 	config.bases_captured_enemy = new_config.bases_captured_enemy
 	config.enemies_killed = new_config.enemies_killed
 	config.number_of_enemies = new_config.number_of_enemies
-	config.base_list = new_config.base_list
 	adjust_enemy_spawn_rate()
 	adjust_behavior_priority()
 	adjust_item_spawn()
 	return config
 	
 func check_state():
-	if config.enemies_killed > config.ENEMIES_KILLED_THRESHOLD:
+	if config.enemies_killed > ModifiablePlayerValues.ENEMIES_KILLED_THRESHOLD:
 		return true 
 
 func get_next_state():
 	return 2
 
 func adjust_enemy_spawn_rate():
-	if config.number_of_enemies < 4 and config.respawn_timer > 5:
+	if config.number_of_enemies < int(ModifiablePlayerValues.MAX_ENEMY_THRESHOLD/2) and config.respawn_timer > 4:
 		config.respawn_timer -= 0.1
 	if config.number_of_enemies >= config.max_enemies:
 		config.max_enemies += 1
-	if config.bases_captured_enemy <= 3:
-		config.max_enemies += 1
-		config.respawn_timer -= 0.1
-
+	if config.bases_captured_enemy <= 3 and config.respawn_timer > 5:
+		config.respawn_timer -= 0.3
+	if config.current_player_health < int(40 * ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT) and config.bases_captured_player < 3:
+		config.respawn_timer += 0.2
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders
@@ -54,7 +53,7 @@ func adjust_behavior_priority(): #Distribute between attackers, seekers & defend
 	pass
 	
 func adjust_item_spawn():
-	if config.current_player_health < 40 and config.item_respawn_timer > 5 and config.carried_items < 3:
+	if config.current_player_health < 40 * ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT and config.item_respawn_timer > 5 and config.carried_items < 3:
 		config.item_respawn_timer -= 0.5
 	elif config.current_player_health > 80 and config.item_respawn_timer < 15:
 		config.item_respawn_timer += 1

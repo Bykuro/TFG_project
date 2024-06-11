@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcfoqbxu36c6l"]
+
+[ext_resource type="PackedScene" uid="uid://bjfm4ei5ypt1t" path="res://menu/slider_settings.tscn" id="1_tftmf"]
+
+[node name="Settings_Tab_Container" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="Accesibility" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Accesibility"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accesibility/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slider_settings" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_tftmf")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "Health multiplier"
+
+[node name="Slider_settings2" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_tftmf")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "Enemies to kill"
+
+[node name="Slider_settings3" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_tftmf")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "Max enemy Quantity"
+
+[node name="Slider_settings4" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_tftmf")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "Enemy multiplier"
+
+[node name="Slider_settings5" parent="TabContainer/Accesibility/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_tftmf")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "Max enemies per wave"

@@ -16,7 +16,7 @@ func update(new_config):
 	pass
 	
 func check_state():	#If player too low on health and has no items to heal or there are too many enemies, switch phase
-	if (config.current_player_health < 50 and config.carried_items <= 0) or config.number_of_enemies > config.MAX_ENEMY_THRESHOLD:
+	if (config.current_player_health < 50 and config.carried_items <= 0) or config.number_of_enemies > ModifiablePlayerValues.MAX_ENEMY_THRESHOLD:
 		return true
 
 func get_next_state():

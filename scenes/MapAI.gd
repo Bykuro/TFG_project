@@ -42,9 +42,11 @@ func initialize(capturable_bases_init: Array, pathfinding_init: Pathfinding, res
 	GlobalSignals.base_captured.connect(handle_base_captured)
 	GlobalSignals.send_config_values.connect(get_new_values)
 	check_for_next_capturable_bases_init()
+	GlobalSignals.emit_signal("enemy_spawned",unit_container.get_children().size())
 
 func handle_base_captured():
 	check_for_next_capturable_bases()
+	check_for_next_defendable_base()
 
 func get_new_values(new_config):	#Update enemy precision; enemies per wave, max enemies, enemy behavior coeficient
 	capturer_coeficient = new_config.behavior_distribution_attacker
@@ -52,6 +54,7 @@ func get_new_values(new_config):	#Update enemy precision; enemies per wave, max 
 	seeker_coeficient = new_config.behavior_distribution_seeker
 	enemy_per_wave = new_config.enemy_per_wave
 	max_units_alive = new_config.max_enemies
+	respawn_timer.wait_time = new_config.respawn_timer
 	
 func check_for_next_capturable_bases_init():
 	var next_base = get_next_capturable_base_init()
@@ -69,12 +72,13 @@ func check_for_next_capturable_bases():
 			print("No next_base found in check_for_next_capturable_bases() MapAI")
 
 func check_for_next_defendable_base():
-	var next_base = get_next_defendable_base()
-	if next_base != null:
-		target_defensive_base = next_base
-		assign_next_defendable_base_to_units(next_base)
-	else:
-		print("No next_base found in check_for_next_defendable_base() MapAI")
+	for entity in unit_container.get_children():
+		var next_base = get_next_defendable_base(entity)
+		if next_base != null:
+			target_defensive_base = next_base
+			assign_next_capturable_base_to_units(next_base, entity)
+		else:
+			print("No next_base found in check_for_next_defendable_base() MapAI")
 
 func get_next_capturable_base(enemy):	#Looks for next available base with the highest priority
 	var list_of_bases = range(capturable_bases.size()) 
@@ -98,11 +102,12 @@ func get_next_capturable_base_init():
 				return base
 	return null
 
-func get_next_defendable_base():	#Looks for next defendable base with the highest priority
+func get_next_defendable_base(enemy):	#Looks for next defendable base with the highest priority
 	var list_of_bases = range(capturable_bases.size()) 
 	if base_capture_start_order == BaseCaptureStartOrder.LAST:
 		list_of_bases = range(capturable_bases.size() - 1,  -1, -1)
 		
+	capturable_bases.sort_custom(distance_sort.bind(enemy))
 	capturable_bases.sort_custom(priority_sort)
 	for i in list_of_bases:
 		var base = capturable_bases[i]
@@ -168,6 +173,7 @@ func set_unit_ai_to_advance_next_defensive_base(unit_temp: Actor):
 
 func handle_unit_death():
 	var unit_size = unit_container.get_children().size() - 1
+	GlobalSignals.emit_signal("enemy_spawned",unit_container.get_children().size())
 	if respawn_timer.is_stopped() and unit_size < max_units_alive:
 		respawn_timer.start()
 		return
