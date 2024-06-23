@@ -18,13 +18,13 @@ func set_variable_num_label_text():
 	var_num_lbl.text = str(h_slider.value)
 
 func set_max_and_min_values():
+	var temp
 	match bus_name:
 		"Health multiplier":
 			h_slider.min_value = 1
 			h_slider.max_value = 2
 			h_slider.step = 0.1
-			h_slider.value = ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT
-			print(h_slider.value)
+			h_slider.value = ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT/2
 		"Enemies to kill":
 			h_slider.min_value = 10
 			h_slider.max_value = 100
@@ -37,11 +37,11 @@ func set_max_and_min_values():
 			h_slider.min_value = 1
 			h_slider.max_value = 4
 			h_slider.step = 0.1
-			h_slider.value = ModifiablePlayerValues.ENEMY_MULTIPLIER
+			h_slider.value = ModifiablePlayerValues.ENEMY_MULTIPLIER/4
 		"Max enemies per wave":
 			h_slider.min_value = 2
 			h_slider.max_value = 5
-			h_slider.value = ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE
+			h_slider.value = ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE-2
 
 func on_value_changed(value: float):
 	match bus_name:
