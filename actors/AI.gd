@@ -15,7 +15,8 @@ enum AIType{
 enum State{
 	PATROL,
 	ENGAGE,
-	ADVANCE
+	ADVANCE,
+	SEEK
 }
 
 
@@ -28,7 +29,8 @@ var actor: Actor = null
 var player: CharacterBody2D = null
 var weapon: Weapon = null
 var precision_value = 5
-
+var boolean_timer = false
+@onready var time_alert = $AlertTimer
 #PATROL STATE
 var origin = Vector2.ZERO
 var patrol_location = Vector2.ZERO
@@ -37,6 +39,8 @@ var patrol_location_reached = false
 #ADVANCE STATE
 var next_objective = Vector2.ZERO
 
+#SEEK STATE
+var pos_deviation = 50
 var pathfinding: Pathfinding
 var detection: Array
 func generate_raycasts():
@@ -45,6 +49,7 @@ func generate_raycasts():
 func _ready():
 	set_state(State.PATROL)
 	generate_raycasts()
+	time_alert.wait_time = 2
 	
 func _physics_process(_delta):
 	detect_player()
@@ -62,12 +67,20 @@ func _physics_process(_delta):
 					patrol_timer.start()
 		State.ENGAGE:
 			if player != null and weapon != null:
+				if is_in_sight():
+					boolean_timer = false 
 				actor.rotate_toward(player.global_position)
 				var angle_to_player =  actor.global_position.direction_to(player.global_position).angle()
-				if abs(actor.rotation - angle_to_player) < 0.1:
+				if abs(actor.rotation - angle_to_player) < 0.1 and is_in_sight():
 					weapon.shoot(precision_value)
+					time_alert.stop()
 			else:
 				print("Engage entered, yet no weapon // player")
+			if !is_in_sight():
+				if time_alert.is_stopped() and !boolean_timer:
+					time_alert.start()
+					boolean_timer = true
+					
 		State.ADVANCE:
 			var path = pathfinding.get_new_path(global_position, next_objective)
 			if path.size() > 1: 
@@ -76,10 +89,19 @@ func _physics_process(_delta):
 				actor.move_and_slide() 
 			else:
 				set_state(State.PATROL)
+		State.SEEK:
+			var path = pathfinding.get_new_path(global_position, player.global_position)
+			if path.size() > 1: 
+				actor.velocity = actor.velocity_toward(path[1])
+				actor.rotate_toward(path[1])
+				actor.move_and_slide() 
+			else:
+				print("Could not find path")
 		_:
 			print("Error: Found non existent state in enemy")
 
-
+func on_alert_timeout():
+	set_state(State.ADVANCE)
 
 func initialize(actor_temp, weapon_temp : Weapon):
 	self.actor = actor_temp
@@ -111,6 +133,13 @@ func detect_player():
 			if i.get_collider() == player:
 				set_state(State.ENGAGE)
 
+func is_in_sight():
+	for i in detection:
+		if i.is_colliding():
+			if i.get_collider() == player:
+				return true
+	return false
+	
 func handle_reload():
 	weapon.start_reload()
 
@@ -122,3 +151,10 @@ func _on_patrol_timer_timeout():
 	patrol_location = Vector2(random_x, random_y) + origin
 	patrol_location_reached = false
 	
+
+
+func _on_alert_timer_timeout():
+	if type == AIType.SEEKER:
+		set_state(State.SEEK)
+	else:
+		set_state(State.ADVANCE)

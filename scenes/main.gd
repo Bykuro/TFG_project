@@ -11,10 +11,12 @@ const player_const = preload("res://actors/Player.tscn")
 @onready var gui = $GUI
 @onready var director = $AIDirector
 @onready var item_spawner = $ItemSpawner
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	GlobalSignals.bullet_fired.connect(bullet_manager.handle_bullet_spawned)
+	
 	spawn_player()
 	
 

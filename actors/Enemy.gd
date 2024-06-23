@@ -29,7 +29,7 @@ func get_team() -> int:
 	return team.team
 	
 func handle_hit():
-	health_stat.health -=20
+	health_stat.health -=25
 	ai.current_state = AI.State.ENGAGE
 	if health_stat.health <= 0:
 		emit_signal("died")

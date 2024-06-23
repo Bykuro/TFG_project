@@ -81,7 +81,7 @@ func adjust_capture_priority():
 		if base.team.team == Team.TeamName.PLAYER:
 			if base.capture_priority > 1:
 				base.capture_priority -= 1
-			if base.time_captured.wait_time - base.time_captured.time_left > 15:
+			if base.time_captured.wait_time - base.time_captured.time_left > 15 and base.capture_size < 5:
 				base.capture_size += 1
 				
 		if base.team.team == Team.TeamName.ENEMY:

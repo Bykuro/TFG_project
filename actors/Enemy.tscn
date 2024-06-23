@@ -222,10 +222,30 @@ target_position = Vector2(378, -1)
 rotation = -1.0472
 target_position = Vector2(378, -1)
 
+[node name="RayCast2D49" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 1.309
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D50" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = 1.5708
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D51" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -1.309
+target_position = Vector2(378, -1)
+
+[node name="RayCast2D52" type="RayCast2D" parent="AI/PlayerRaycastDetection"]
+rotation = -1.5708
+target_position = Vector2(378, -1)
+
 [node name="PatrolTimer" type="Timer" parent="AI"]
+wait_time = 3.0
+
+[node name="AlertTimer" type="Timer" parent="AI"]
 wait_time = 3.0
 
 [node name="Team" parent="." instance=ExtResource("6_s40u4")]
 team = 2
 
 [connection signal="timeout" from="AI/PatrolTimer" to="AI" method="_on_patrol_timer_timeout"]
+[connection signal="timeout" from="AI/AlertTimer" to="AI" method="_on_alert_timer_timeout"]

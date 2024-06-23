@@ -23,7 +23,7 @@ region_enabled = true
 region_rect = Rect2(1484, 268, 40, 40)
 
 [node name="CaptureTimer" type="Timer" parent="."]
-wait_time = 6.0
+wait_time = 5.0
 
 [node name="Team" parent="." instance=ExtResource("3_7sn2v")]
 team = 0

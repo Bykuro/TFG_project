@@ -53,7 +53,7 @@ func update_navigation_map():
 				var id = get_id_for_point(tile)
 				if astar.has_point(id):
 					astar.set_point_disabled(id, true)
-		if obstacle is CharacterBody2D:
+		if obstacle is CharacterBody2D and !obstacle.is_in_group("player"):
 			var tile_coord = tilemap.local_to_map(obstacle.collision_shape.global_position)
 			var id = get_id_for_point(tile_coord)
 			if astar.has_point(id):

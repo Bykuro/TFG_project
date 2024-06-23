@@ -57,6 +57,7 @@ func _on_body_exited(body):
 func check_whether_base_can_be_captured():
 	var majority_team = get_team_majority()
 	if majority_team == Team.TeamName.NEUTRAL:
+		capture_timer.stop()
 		return
 	elif majority_team == team.team:
 		team_to_capture = Team.TeamName.NEUTRAL

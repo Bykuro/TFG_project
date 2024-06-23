@@ -25,7 +25,7 @@ func adjust_enemy_spawn_rate():
 	if  config.number_of_enemies > 4 and config.max_enemies > 4:
 		config.max_enemies -= 1
 	if config.respawn_timer < 1.5:
-		config.respawn_timer += 0.1
+		config.respawn_timer += 0.1 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders

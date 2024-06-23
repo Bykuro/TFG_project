@@ -38,15 +38,19 @@ func initialize(capturable_bases_init: Array, pathfinding_init: Pathfinding, res
 	for respawn in respawn_points:
 		spawn_unit(respawn.global_position)
 	
-	
 	GlobalSignals.base_captured.connect(handle_base_captured)
 	GlobalSignals.send_config_values.connect(get_new_values)
 	check_for_next_capturable_bases_init()
 	GlobalSignals.emit_signal("enemy_spawned",unit_container.get_children().size())
 
 func handle_base_captured():
+	clean_base_size()
 	check_for_next_capturable_bases()
 	check_for_next_defendable_base()
+
+func clean_base_size():
+	for i in capturable_bases:
+		i.enemies_on_site.clear()
 
 func get_new_values(new_config):	#Update enemy precision; enemies per wave, max enemies, enemy behavior coeficient
 	capturer_coeficient = new_config.behavior_distribution_attacker
@@ -62,44 +66,57 @@ func check_for_next_capturable_bases_init():
 		target_offensive_base = next_base
 		assign_next_capturable_base_to_units_init()
 
-func check_for_next_capturable_bases():
-	for entity in unit_container.get_children():
-		var next_base = get_next_capturable_base(entity)
-		if next_base != null:
-			target_offensive_base = next_base
-			assign_next_capturable_base_to_units(next_base, entity)
-		else:
-			print("No next_base found in check_for_next_capturable_bases() MapAI")
-
-func check_for_next_defendable_base():
-	for entity in unit_container.get_children():
-		var next_base = get_next_defendable_base(entity)
-		if next_base != null:
-			target_defensive_base = next_base
-			assign_next_capturable_base_to_units(next_base, entity)
-		else:
-			print("No next_base found in check_for_next_defendable_base() MapAI")
-
-func get_next_capturable_base(enemy):	#Looks for next available base with the highest priority
-	var list_of_bases = range(capturable_bases.size()) 
-	if base_capture_start_order == BaseCaptureStartOrder.LAST:
-		list_of_bases = range(capturable_bases.size() - 1,  -1, -1)
-	capturable_bases.sort_custom(distance_sort.bind(enemy))
-	#capturable_bases.sort_custom(priority_sort)
-	for i in list_of_bases:
-		var base = capturable_bases[i]
-		if enemy.team.team != base.team.team and base.enemy_unit_count < base.capture_size:
-			return base
-	return null
-
 func get_next_capturable_base_init():
 	for enemy in unit_container.get_children():
 		capturable_bases.sort_custom(priority_sort)
 		capturable_bases.sort_custom(distance_sort.bind(enemy))
 		for base in capturable_bases:
-			# base.priority
-			if team.team != base.team.team and base.enemy_unit_count < base.capture_size:
-				return base
+			if enemy.team.team != base.team.team and !base.enemies_on_site.has(enemy) and base.enemies_on_site.size() < base.capture_size:
+				base.enemies_on_site.append(enemy)
+				print("ENEMIES ON SITE:")
+				print(base.enemies_on_site.size())
+	return null
+	
+func assign_next_capturable_base_to_units_init():
+	for entity in unit_container.get_children():
+		#if entity.ai.type == AI.AIType.CAPTURER:	#Checks if enemy is a capturer
+		set_unit_ai_to_advance_next_base(entity)
+		
+func check_for_next_capturable_bases():
+	for entity in unit_container.get_children():
+		if entity.ai.type == AI.AIType.CAPTURER:
+			var next_base = get_next_capturable_base(entity)
+			if next_base != null:
+				target_offensive_base = next_base
+				assign_next_base_to_units(next_base, entity)
+			else:
+				print("No capturable base found, switching to DEFENDER")
+				entity.ai.type = AI.AIType.DEFENDER
+
+func check_for_next_defendable_base():
+	for entity in unit_container.get_children():
+		if entity.ai.type == AI.AIType.DEFENDER:
+			var next_base = get_next_defendable_base(entity)
+			if next_base != null:
+				target_defensive_base = next_base
+				assign_next_base_to_units(next_base, entity)
+			else:
+				print("No defendable base found, switching to CAPTURER")
+				entity.ai.type = AI.AIType.CAPTURER
+
+func get_next_capturable_base(enemy):	#Looks for next available base with the highest priority
+	var list_of_bases = range(capturable_bases.size()) 
+	if base_capture_start_order == BaseCaptureStartOrder.LAST:
+		list_of_bases = range(capturable_bases.size() - 1,  -1, -1)
+	capturable_bases.sort_custom(priority_sort)
+	capturable_bases.sort_custom(distance_sort.bind(enemy))
+	for i in list_of_bases:
+		var base = capturable_bases[i]
+		if enemy.team.team != base.team.team and !base.enemies_on_site.has(enemy) and base.enemies_on_site.size() < base.capture_size:
+			base.enemies_on_site.append(enemy)
+			print("ENEMIES ON SITE:")
+			print(base.enemies_on_site.size())
+			return base
 	return null
 
 func get_next_defendable_base(enemy):	#Looks for next defendable base with the highest priority
@@ -107,34 +124,26 @@ func get_next_defendable_base(enemy):	#Looks for next defendable base with the h
 	if base_capture_start_order == BaseCaptureStartOrder.LAST:
 		list_of_bases = range(capturable_bases.size() - 1,  -1, -1)
 		
-	capturable_bases.sort_custom(distance_sort.bind(enemy))
 	capturable_bases.sort_custom(priority_sort)
+	capturable_bases.sort_custom(distance_sort.bind(enemy))
 	for i in list_of_bases:
 		var base = capturable_bases[i]
-		# base.priority
-		if team.team == base.team.team and base.enemy_unit_count < base.capture_size:
-			return base
+		if enemy.team.team == base.team.team and !base.enemies_on_site.has(enemy) and base.enemies_on_site.size() < base.capture_size:
+				base.enemies_on_site.append(enemy)
+				return base
 	return null
+	
+
 
 func priority_sort(a, b):
 	return a.capture_priority < b.capture_priority
 func distance_sort(a, b, enemy):
 	return enemy.position.distance_to(a.position) < enemy.position.distance_to(b.position)
 	
-func assign_next_capturable_base_to_units(_base, entity):
-	if entity.ai.type == AI.AIType.CAPTURER:	#Checks if enemy is a capturer
+func assign_next_base_to_units(_base, entity):
+	if entity.ai.type == AI.AIType.CAPTURER or entity.ai.type == AI.AIType.DEFENDER:	#Checks if enemy is a capturer
 		set_unit_ai_to_advance_next_base(entity)
 
-func assign_next_capturable_base_to_units_init():
-	for entity in unit_container.get_children():
-		#if entity.ai.type == AI.AIType.CAPTURER:	#Checks if enemy is a capturer
-		set_unit_ai_to_advance_next_base(entity)
-
-func assign_next_defendable_base_to_units(_base):
-		
-	for entity in unit_container.get_children():
-		if entity.ai.type == AI.AIType.DEFENDER:	#Checks if enemy is a defender
-			set_unit_ai_to_advance_next_base(entity)
 
 func spawn_unit(spawn_location: Vector2):
 	var unit_instance = unit.instantiate()
@@ -149,7 +158,7 @@ func spawn_unit(spawn_location: Vector2):
 	elif random <= (capturer_coeficient + defender_coeficient) and random > capturer_coeficient:
 		unit_instance.ai.type = AI.AIType.DEFENDER
 	elif random <= 1 and random > (capturer_coeficient + defender_coeficient):
-		unit_container.ai.type = AI.AIType.SEEKER
+		unit_instance.ai.type = AI.AIType.SEEKER
 	
 	set_unit_ai_to_advance_next_base(unit_instance)
 	GlobalSignals.emit_signal("enemy_spawned",unit_container.get_children().size())
@@ -169,11 +178,9 @@ func set_unit_ai_to_advance_next_base(unit_temp: Actor):
 			ai.set_state(AI.State.ADVANCE)
 		else:
 			print("Defender spawned, yet no defensive base found!")
-
-func set_unit_ai_to_advance_next_defensive_base(unit_temp: Actor):
-	if target_defensive_base != null:
-		unit_temp.ai.next_objective = target_defensive_base.get_random_position_within_radius()
-		unit_temp.ai.set_state(AI.State.ADVANCE)
+	elif unit_temp.ai.type == AI.AIType.SEEKER:
+			var ai: AI = unit_temp.ai
+			ai.set_state(AI.State.SEEK)
 
 func handle_unit_death():
 	var unit_size = unit_container.get_children().size() - 1

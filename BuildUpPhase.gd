@@ -29,11 +29,11 @@ func adjust_enemy_spawn_rate():
 	if config.number_of_enemies < int(ModifiablePlayerValues.MAX_ENEMY_THRESHOLD/2) and config.respawn_timer > 4:
 		config.respawn_timer -= 0.1
 	if config.number_of_enemies >= config.max_enemies:
-		config.max_enemies += 1
+		config.max_enemies += int(1 * ModifiablePlayerValues.ENEMY_MULTIPLIER)
 	if config.bases_captured_enemy <= 3 and config.respawn_timer > 5:
-		config.respawn_timer -= 0.3
+		config.respawn_timer -= 0.4 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	if config.current_player_health < int(40 * ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT) and config.bases_captured_player < 3:
-		config.respawn_timer += 0.2
+		config.respawn_timer += 0.2 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders

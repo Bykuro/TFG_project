@@ -16,8 +16,10 @@ var carried_meds = 2
 
 func _ready():
 	GlobalSignals.add_ammo.connect(handle_reload)
-	weapon.attack_cooldown.wait_time = 0.2
-
+	weapon.attack_cooldown.wait_time = 0.1
+	health_stat.health = 100 * ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT
+	print(health_stat.health)
+	print(ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT)
 func get_input():
 	var input_dir = Input.get_vector("left","right","up","down")
 	velocity = input_dir * SPEED
@@ -52,7 +54,7 @@ func reload():
 
 func handle_hit():
 	
-	health_stat.health -= randi_range(4,10)
+	health_stat.health -= 5
 	GlobalSignals.emit_signal("player_health_change", health_stat.health)
 	if health_stat.health <= 0:
 		player_death()
@@ -64,7 +66,7 @@ func player_death():
 func handle_healing():
 	if carried_meds > 0:
 		carried_meds -= 1
-		health_stat.health += 40
+		health_stat.health += 50
 		if health_stat.health > 100:
 			health_stat.health = 100
 		GlobalSignals.emit_signal("player_health_change", health_stat.health)
