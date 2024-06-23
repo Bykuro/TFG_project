@@ -24,11 +24,11 @@ func _ready():
 	
 	var enemy_respawns = $EnemyRespawnPoints
 	var bases = capturable_base_manager.get_capturable_bases()
-	director.initialize(bases)
 	enemy_ai.initialize(bases,pathfinding,enemy_respawns.get_children())
 	
 	var item_respawn = $ItemSpawnPoints
 	item_spawner.initialize(item_respawn.get_children())
+	director.initialize(bases)
 	
 	
 	

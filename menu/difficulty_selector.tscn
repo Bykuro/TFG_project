@@ -1,14 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://5w07dq8dnpr6"]
+[gd_scene load_steps=4 format=3 uid="uid://dy8uadf36b78s"]
 
-[ext_resource type="Script" path="res://menu/main_menu.gd" id="1_firih"]
-[ext_resource type="Texture2D" uid="uid://2f1i4d60ev50" path="res://assets/menupng.PNG" id="1_vmw1u"]
-[ext_resource type="PackedScene" uid="uid://ditjlqde4ej21" path="res://menu/options_menu.tscn" id="3_i8166"]
-[ext_resource type="PackedScene" uid="uid://dy8uadf36b78s" path="res://menu/difficulty_selector.tscn" id="4_prhxc"]
+[ext_resource type="Script" path="res://menu/difficulty_selector.gd" id="1_dbks5"]
 
-[sub_resource type="SystemFont" id="SystemFont_xaipo"]
+[sub_resource type="SystemFont" id="SystemFont_h7l8x"]
 font_names = PackedStringArray("Impact")
 
-[sub_resource type="LabelSettings" id="LabelSettings_v87ie"]
+[sub_resource type="LabelSettings" id="LabelSettings_25glp"]
 line_spacing = 10.0
 font_size = 24
 outline_size = 2
@@ -16,29 +13,14 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 9
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Main_Menu" type="Control"]
+[node name="Difficulty_Selector" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_firih")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -808.0
-offset_top = -381.0
-offset_right = 832.0
-offset_bottom = 502.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_vmw1u")
+script = ExtResource("1_dbks5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -64,10 +46,10 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 12
 theme_override_constants/shadow_offset_y = 7
 theme_override_constants/outline_size = 24
-theme_override_fonts/font = SubResource("SystemFont_xaipo")
+theme_override_fonts/font = SubResource("SystemFont_h7l8x")
 theme_override_font_sizes/font_size = 64
-text = "G A M E   T I T L E"
-label_settings = SubResource("LabelSettings_v87ie")
+text = "S E L E C T   D I F F I C U L T Y"
+label_settings = SubResource("LabelSettings_25glp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -83,34 +65,40 @@ theme_override_constants/separation = 8
 [node name="Separator" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="EasyButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
-text = "Start
+text = "Easy
 "
 
 [node name="Separator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="NormalButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
-text = "Options
+text = "Normal
 "
 
 [node name="Separator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HardButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
-text = "Exit
+text = "Hard
 "
 
-[node name="Options_Menu" parent="." instance=ExtResource("3_i8166")]
-visible = false
-layout_mode = 1
+[node name="Separator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
-[node name="Difficulty_Selector" parent="." instance=ExtResource("4_prhxc")]
-visible = false
-layout_mode = 1
+[node name="AdaptativeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+text = "Adaptative
+"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/NormalButton" to="." method="_on_normal_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/AdaptativeButton" to="." method="_on_adaptative_button_pressed"]

@@ -1,5 +1,7 @@
 extends Node
 
+
+
 var PLAYER_BASE_THRESHOLD = 4
 
 #Percentual value of enemy distribution
@@ -53,5 +55,41 @@ func update(new_config):
 	current_player_health = new_config.current_player_health
  	
  	
+
+func start_difficulty(difficulty: ModifiablePlayerValues.Difficulty):
+	
+	match difficulty:
+		ModifiablePlayerValues.Difficulty.EASY:
+			behavior_distribution_attacker = 0.5
+			behavior_distribution_defender = 0.5
+			behavior_distribution_seeker = 0.0
+			item_respawn_timer = 5.0
+			precision_value = 3
+			max_enemies = 16
+			enemy_per_wave = 1
+			respawn_timer = 5.0	
+			pass
+		ModifiablePlayerValues.Difficulty.NORMAL:
+			behavior_distribution_attacker = 0.4
+			behavior_distribution_defender = 0.4
+			behavior_distribution_seeker = 0.2
+			item_respawn_timer = 6.0
+			precision_value = 1.5
+			max_enemies = 25
+			enemy_per_wave = 2
+			respawn_timer = 4.0
+			pass
+		ModifiablePlayerValues.Difficulty.HARD:
+			behavior_distribution_attacker = 0.5
+			behavior_distribution_defender = 0.25
+			behavior_distribution_seeker = 0.25
+			item_respawn_timer = 7.0
+			precision_value = 0.5
+			max_enemies = 40
+			enemy_per_wave = 4
+			respawn_timer = 3.0
+			pass
+	
+
 
 

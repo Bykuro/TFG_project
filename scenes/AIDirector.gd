@@ -15,17 +15,28 @@ var current_phase
 var config = preload("res://ConfigData.gd").new()
 
 func initialize(capturable_bases_init: Array):
-	change_phase(AIPhase.START)
-	add_child(timer_check)
-	timer_check.wait_time = 6.0
-	timer_check.start()
-	base_list = capturable_bases_init
 	GlobalSignals.player_health_change.connect(update_health)
 	GlobalSignals.medkit_action.connect(update_items)
 	GlobalSignals.enemy_spawned.connect(update_enemies)
-	GlobalSignals.emit_signal("send_config_values", config)
 	GlobalSignals.sendCurrentPhase.emit(current_ai_phase)
 	GlobalSignals.enemy_died.connect(update_enemy_death)
+	
+	match ModifiablePlayerValues.difficulty_chosen:
+		ModifiablePlayerValues.Difficulty.DIRECTOR:
+			change_phase(AIPhase.START)
+			add_child(timer_check)
+			timer_check.wait_time = 6.0
+			timer_check.start()
+			base_list = capturable_bases_init
+			
+		ModifiablePlayerValues.Difficulty.EASY:
+			config.start_difficulty(ModifiablePlayerValues.Difficulty.EASY)
+		ModifiablePlayerValues.Difficulty.NORMAL:
+			config.start_difficulty(ModifiablePlayerValues.Difficulty.NORMAL)
+		ModifiablePlayerValues.Difficulty.HARD:
+			config.start_difficulty(ModifiablePlayerValues.Difficulty.HARD)
+	
+	GlobalSignals.emit_signal("send_config_values", config)
 
 func update_enemy_death():
 	config.enemies_killed += 1
@@ -40,10 +51,10 @@ func update_enemies(new_enemy_quantity):
 	config.number_of_enemies = new_enemy_quantity
 	
 func _process(_delta):
-
-	if timer_check.time_left <= 1:		#Every 5 seconds update information about game
-		current_phase_update()
-		timer_check.start()
+	if ModifiablePlayerValues.difficulty_chosen == ModifiablePlayerValues.Difficulty.DIRECTOR:
+		if timer_check.time_left <= 1:		#Every 5 seconds update information about game
+			current_phase_update()
+			timer_check.start()
 	# ADD DEBUG OPTION TO VISUALIZE INFORMATION
 
 
