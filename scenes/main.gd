@@ -11,7 +11,7 @@ const player_const = preload("res://actors/Player.tscn")
 @onready var gui = $GUI
 @onready var director = $AIDirector
 @onready var item_spawner = $ItemSpawner
-
+@onready var menu = load("res://menu/main_menu.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -32,6 +32,10 @@ func _ready():
 	
 	
 	
+func _unhandled_input(event):
+	if event.is_action_pressed("escape"):
+		get_tree().change_scene_to_packed(menu)
+
 
 func spawn_player():
 	var player = player_const.instantiate()
