@@ -28,6 +28,10 @@ wait_time = 5.0
 [node name="Team" parent="." instance=ExtResource("3_7sn2v")]
 team = 0
 
+[node name="CaptureTimerPlayer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="CaptureTimer" to="." method="_on_capture_timer_timeout"]
+[connection signal="timeout" from="CaptureTimerPlayer" to="." method="_on_capture_timer_timeout"]

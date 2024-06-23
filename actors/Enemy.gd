@@ -29,9 +29,9 @@ func get_team() -> int:
 	return team.team
 	
 func handle_hit():
-	health_stat.health -=25
+	health_stat.health -= randi_range(34,66)
 	ai.current_state = AI.State.ENGAGE
 	if health_stat.health <= 0:
-		emit_signal("died")
+		GlobalSignals.emit_signal("enemy_died")
 		GlobalSignals.emit_signal("spawn_item",self.global_position)
 		queue_free()

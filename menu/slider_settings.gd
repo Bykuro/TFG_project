@@ -31,16 +31,16 @@ func set_max_and_min_values():
 			h_slider.value = ModifiablePlayerValues.ENEMIES_KILLED_THRESHOLD
 		"Max enemy Quantity":
 			h_slider.min_value = 8
-			h_slider.max_value = 100
+			h_slider.max_value = 50
 			h_slider.value = ModifiablePlayerValues.MAX_ENEMY_THRESHOLD
 		"Enemy multiplier":
-			h_slider.min_value = 0.5
-			h_slider.max_value = 2
+			h_slider.min_value = 1
+			h_slider.max_value = 4
 			h_slider.step = 0.1
 			h_slider.value = ModifiablePlayerValues.ENEMY_MULTIPLIER
 		"Max enemies per wave":
 			h_slider.min_value = 2
-			h_slider.max_value = 12
+			h_slider.max_value = 5
 			h_slider.value = ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE
 
 func on_value_changed(value: float):

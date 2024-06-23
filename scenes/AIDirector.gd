@@ -25,7 +25,10 @@ func initialize(capturable_bases_init: Array):
 	GlobalSignals.enemy_spawned.connect(update_enemies)
 	GlobalSignals.emit_signal("send_config_values", config)
 	GlobalSignals.sendCurrentPhase.emit(current_ai_phase)
+	GlobalSignals.enemy_died.connect(update_enemy_death)
 
+func update_enemy_death():
+	config.enemies_killed += 1
 func update_health(new_health):
 	config.current_player_health = new_health
 	pass
@@ -52,6 +55,7 @@ func current_phase_update():
 	config = current_phase.update(config)
 	GlobalSignals.emit_signal("send_config_values", config)
 	if current_phase.check_state():
+		config.enemies_killed = 0
 		change_phase(current_phase.get_next_state())
 
 func change_phase(new_phase: AIPhase):
@@ -86,12 +90,12 @@ func adjust_capture_priority():
 				
 		if base.team.team == Team.TeamName.ENEMY:
 			if base.time_captured.wait_time - base.time_captured.time_left > 10:
-				if base.capture_size > 1:
+				if base.capture_size > 2:
 					base.capture_size -= 1
 			if base.capture_priority < 3:
 				base.capture_priority += 1
 		if base.team.team == Team.TeamName.NEUTRAL:
-			if base.capture_size > 1:
+			if base.capture_size > 2:
 				base.capture_size -= 1
 			if base.capture_priority > 1:
 				base.capture_priority -= 1

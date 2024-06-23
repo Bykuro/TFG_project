@@ -35,9 +35,9 @@ func initialize(capturable_bases_init: Array, pathfinding_init: Pathfinding, res
 		push_error("MapAI not initialized")
 		return
 		
-	for respawn in respawn_points:
-		spawn_unit(respawn.global_position)
-	
+	for i in max_units_alive:
+		spawn_unit(respawn_points[i].global_position)
+	GlobalSignals.enemy_died.connect(handle_unit_death)
 	GlobalSignals.base_captured.connect(handle_base_captured)
 	GlobalSignals.send_config_values.connect(get_new_values)
 	check_for_next_capturable_bases_init()
@@ -149,7 +149,7 @@ func spawn_unit(spawn_location: Vector2):
 	var unit_instance = unit.instantiate()
 	unit_container.add_child(unit_instance)
 	unit_instance.global_position = spawn_location
-	unit_instance.connect("died",handle_unit_death)
+	
 	unit_instance.ai.pathfinding = pathfinding
 	unit_instance.ai.player = player_unit
 	var random = randf_range(0.0, 1.0)

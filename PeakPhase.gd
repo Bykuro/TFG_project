@@ -15,7 +15,7 @@ func update(new_config):
 	return config
 	
 func check_state():	#If player too low on health and has no items to heal or there are too many enemies, switch phase
-	if (config.current_player_health < 50 and config.carried_items <= 0) or config.number_of_enemies > ModifiablePlayerValues.MAX_ENEMY_THRESHOLD * ModifiablePlayerValues.ENEMY_MULTIPLIER:
+	if (config.current_player_health < 20 and config.carried_items <= 0) or config.number_of_enemies >= ModifiablePlayerValues.MAX_ENEMY_THRESHOLD:
 		return true
 
 func get_next_state():
@@ -26,7 +26,7 @@ func adjust_enemy_spawn_rate():
 	if config.enemy_per_wave > ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE:
 		config.enemy_per_wave = ModifiablePlayerValues.MAX_ENEMIES_PER_WAVE
 			
-	if config.enemy_per_wave < 3 * ModifiablePlayerValues.ENEMY_MULTIPLIER:
+	if config.enemy_per_wave < ModifiablePlayerValues.ENEMY_MULTIPLIER:
 		config.max_enemies += 2 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	pass
 	

@@ -12,11 +12,12 @@ var team_to_capture = Team.TeamName.NEUTRAL
 var time_captured = Timer.new()
 
 @onready var capture_priority = 2 # 3 == LOW , 2 == NORMAL , 1 == HIGH
-@onready var capture_size = 3
+@onready var capture_size = 4
 @onready var player_unit_count = 0
 @onready var collision_shape = $CollisionShape2D
 @onready var team = $Team
 @onready var capture_timer = $CaptureTimer
+@onready var capture_timer_player = $CaptureTimerPlayer
 @onready var sprite = $Sprite2D
 
 func _ready():
@@ -36,7 +37,6 @@ func _on_body_entered(body):
 	if body.has_method("get_team"):
 		var body_team = body.get_team()
 		if body_team == Team.TeamName.ENEMY:
-			enemies_on_site.append(body)
 			enemy_unit_count += 1
 		if body_team == Team.TeamName.PLAYER:
 			player_unit_count += 1
@@ -58,14 +58,20 @@ func check_whether_base_can_be_captured():
 	var majority_team = get_team_majority()
 	if majority_team == Team.TeamName.NEUTRAL:
 		capture_timer.stop()
+		capture_timer_player.stop()
 		return
 	elif majority_team == team.team:
 		team_to_capture = Team.TeamName.NEUTRAL
 		capture_timer.stop()
+		capture_timer_player.stop()
 	else:
 		team_to_capture = majority_team 
-		if capture_timer.is_stopped():
-			capture_timer.start()
+		if team_to_capture == Team.TeamName.ENEMY:
+			if capture_timer.is_stopped():
+				capture_timer.start()
+		if team_to_capture == Team.TeamName.PLAYER:
+			if capture_timer_player.is_stopped():
+				capture_timer_player.start()
 
 func get_team_majority() -> Team.TeamName:
 		print(enemy_unit_count)

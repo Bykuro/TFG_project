@@ -54,7 +54,7 @@ func reload():
 
 func handle_hit():
 	
-	health_stat.health -= 5
+	health_stat.health -= 4
 	GlobalSignals.emit_signal("player_health_change", health_stat.health)
 	if health_stat.health <= 0:
 		player_death()

@@ -26,11 +26,11 @@ func get_next_state():
 	return 2
 
 func adjust_enemy_spawn_rate():
-	if config.number_of_enemies < int(ModifiablePlayerValues.MAX_ENEMY_THRESHOLD/2) and config.respawn_timer > 4:
+	if config.number_of_enemies < int(ModifiablePlayerValues.MAX_ENEMY_THRESHOLD/2) and config.respawn_timer > 3:
 		config.respawn_timer -= 0.1
-	if config.number_of_enemies >= config.max_enemies:
+	if config.number_of_enemies >= config.max_enemies - 3 :
 		config.max_enemies += int(1 * ModifiablePlayerValues.ENEMY_MULTIPLIER)
-	if config.bases_captured_enemy <= 3 and config.respawn_timer > 5:
+	if config.bases_captured_enemy <= 3 and config.respawn_timer > 3:
 		config.respawn_timer -= 0.4 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	if config.current_player_health < int(40 * ModifiablePlayerValues.HEALTH_THRESHOLD_COEFICIENT) and config.bases_captured_player < 3:
 		config.respawn_timer += 0.2 * ModifiablePlayerValues.ENEMY_MULTIPLIER
@@ -46,7 +46,7 @@ func adjust_behavior_priority(): #Distribute between attackers, seekers & defend
 		config.behavior_distribution_seeker += config.behavior_distribution_defender/8
 		config.behavior_distribution_defender -= config.behavior_distribution_defender/4 + config.behavior_distribution_defender/8
 	
-	if config.behavior_distribution_seeker > 0.25:		#there shouldn't be more than 25% of enemies seeking
+	if config.behavior_distribution_seeker > 0.33:		#there shouldn't be more than 33% of enemies seeking
 		config.behavior_distribution_attacker += config.behavior_distribution_seeker/8
 		config.behavior_distribution_defender += config.behavior_distribution_seeker/8
 		config.behavior_distribution_seeker -= config.behavior_distribution_seeker/4

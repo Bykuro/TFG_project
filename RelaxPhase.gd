@@ -14,7 +14,7 @@ func update(new_config):
 	return config
 	
 func check_state():
-	if config.bases_captured_player < config.PLAYER_BASE_THRESHOLD:
+	if config.bases_captured_player > config.PLAYER_BASE_THRESHOLD and config.max_enemies < ModifiablePlayerValues.MAX_ENEMY_THRESHOLD/3:
 		return true
 	pass
 
@@ -23,13 +23,13 @@ func get_next_state():
 	
 func adjust_enemy_spawn_rate():
 	if  config.number_of_enemies > 4 and config.max_enemies > 4:
-		config.max_enemies -= 1
+		config.max_enemies -= 1 * int(ModifiablePlayerValues.ENEMY_MULTIPLIER/2)
 	if config.respawn_timer < 1.5:
 		config.respawn_timer += 0.1 * ModifiablePlayerValues.ENEMY_MULTIPLIER
 	pass
 
 func adjust_behavior_priority(): #Distribute between attackers, seekers & defenders
-	if config.long_captured_player_bases < 3:
+	if config.long_captured_enemy_bases > 3:
 		config.behavior_distribution_defender += config.behavior_distribution_attacker/8
 		config.behavior_distribution_attacker -= config.behavior_distribution_attacker/8
 	if config.behavior_distribution_seeker > 0:

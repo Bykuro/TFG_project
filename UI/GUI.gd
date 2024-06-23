@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var max_ammo = $MarginContainer/Rows/BottomRow/AmmoSector/MaxAmmo
 @onready var medkits = $MarginContainer/Rows/TopRow/MedkitSector
 @onready var debug_hud = $MarginContainer/Rows/TopRow/DebugSector
+@onready var v_box_container = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer
 
 @onready var enemy_quantity = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/EnemyQuantity
 @onready var enemy_max = $MarginContainer/Rows/TopRow/DebugSector/VBoxContainer/EnemyMax
@@ -28,9 +29,9 @@ func set_player (player_temp: Player):
 	GlobalSignals.send_config_values.connect(update_debug_info)
 	GlobalSignals.sendCurrentPhase.connect(update_actual_phase)
 	
-func _unhandled_input(event):	#Check debug key
+func _unhandled_input(event):	#Check debug key F1
 	if event.is_action_pressed("debug"):	#Show / Hide debug
-		pass
+		v_box_container.visible = !v_box_container.visible
 
 func update_debug_info(new_config):	#update debug information
 	enemy_quantity.text = "Current Enemies: " + str(new_config.number_of_enemies)
