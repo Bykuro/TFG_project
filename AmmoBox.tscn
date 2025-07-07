@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsfulrlrfsj12"]
 
-[ext_resource type="Script" path="res://AmmoBox.gd" id="1_sevch"]
+[ext_resource type="Script" uid="uid://dkg0pdewwbaq6" path="res://AmmoBox.gd" id="1_sevch"]
 [ext_resource type="Texture2D" uid="uid://bs6of2p5qif17" path="res://assets/topdown-shooter/Spritesheet/spritesheet_tiles.png" id="2_ymq0r"]
 [ext_resource type="Texture2D" uid="uid://dxt7dmg7xxj8d" path="res://assets/kenney_topdowntanksredux/Vector/topdownTanks_vector.svg" id="3_b7kau"]
 

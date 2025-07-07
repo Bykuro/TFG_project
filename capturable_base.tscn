@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://14bo8hf5q7rd"]
 
-[ext_resource type="Script" path="res://CapturableBase.gd" id="1_g2u56"]
+[ext_resource type="Script" uid="uid://dvni3h5he3tub" path="res://CapturableBase.gd" id="1_g2u56"]
 [ext_resource type="Texture2D" uid="uid://ns5voks7c5el" path="res://assets/topdown-shooter/Tilesheet/tilesheet_complete.png" id="2_88wkb"]
 [ext_resource type="PackedScene" uid="uid://m6xi0cqimmbp" path="res://Team.tscn" id="3_7sn2v"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bge55kbka8248"]
 
-[ext_resource type="Script" path="res://medkit.gd" id="1_rjajv"]
+[ext_resource type="Script" uid="uid://rkm0thl87s2w" path="res://medkit.gd" id="1_rjajv"]
 [ext_resource type="Texture2D" uid="uid://bs6of2p5qif17" path="res://assets/topdown-shooter/Spritesheet/spritesheet_tiles.png" id="2_ug3kb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kftdf"]

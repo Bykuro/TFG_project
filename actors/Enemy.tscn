@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjyoj0jqbjx2n"]
 
-[ext_resource type="Script" path="res://actors/Enemy.gd" id="1_6h3y2"]
+[ext_resource type="Script" uid="uid://b6if83eogctce" path="res://actors/Enemy.gd" id="1_6h3y2"]
 [ext_resource type="Texture2D" uid="uid://bd4sjl8nof3dc" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="3_06mf4"]
 [ext_resource type="PackedScene" uid="uid://d08rkty756rgd" path="res://weapons/weapon.tscn" id="4_67g7l"]
 [ext_resource type="PackedScene" uid="uid://bdgv80rlyqgdg" path="res://actors/Health.tscn" id="4_j0mjs"]
-[ext_resource type="Script" path="res://actors/AI.gd" id="5_ccmm7"]
+[ext_resource type="Script" uid="uid://dkhsbvemmx7ha" path="res://actors/AI.gd" id="5_ccmm7"]
 [ext_resource type="PackedScene" uid="uid://m6xi0cqimmbp" path="res://Team.tscn" id="6_s40u4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh8h"]

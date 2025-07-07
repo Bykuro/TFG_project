@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bysmq7bdv4bim"]
 
-[ext_resource type="Script" path="res://scenes/MapAI.gd" id="1_uqpab"]
+[ext_resource type="Script" uid="uid://41jmswf7wtyb" path="res://scenes/MapAI.gd" id="1_uqpab"]
 [ext_resource type="PackedScene" uid="uid://m6xi0cqimmbp" path="res://Team.tscn" id="2_rpfas"]
 
 [node name="MapAI" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://8l3ib1q50336"]
 
-[ext_resource type="Script" path="res://UI/GUI.gd" id="1_y8l8i"]
+[ext_resource type="Script" uid="uid://lnqqerqixfcp" path="res://UI/GUI.gd" id="1_y8l8i"]
 [ext_resource type="Texture2D" uid="uid://bs6of2p5qif17" path="res://assets/topdown-shooter/Spritesheet/spritesheet_tiles.png" id="2_s5kis"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_afukn"]
