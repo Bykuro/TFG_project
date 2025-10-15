@@ -8,7 +8,7 @@ Este proyecto es un videojuego Top-Down en el que el jugador compite contra la I
 El objetivo es implementar una Inteligencia Artificial que adapte el comportamiento de los enemigos según el patrón de juego del jugador, ajustando dinámicamente la dificultad para ofrecer un desafío equilibrado.
 
 ## Tecnologías utilizadas
-- Lenguajes: Python
+- Lenguajes: Python, GDScript
 - Motor de juego: Godot
 - Inteligencia Artificial: algoritmos de ajuste dinámico de dificultad
 
