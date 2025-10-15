@@ -18,4 +18,5 @@ https://drive.google.com/file/d/1x1jBXOCDfXvgDJzb__UkOE9WIuWKWvlm/view?usp=shari
 ## Proyecto compilado
 1. Extrae la carpeta de juego
 2. Ejecuta mediante game.exe
+
 https://drive.google.com/file/d/15en0YoxYBGy2oD85CURyHBq83kh5F9UG/view?usp=sharing
