@@ -13,10 +13,10 @@ El objetivo es implementar una Inteligencia Artificial que adapte el comportamie
 - Inteligencia Artificial: algoritmos de ajuste dinámico de dificultad
 
 ## Documento del TFG
-https://drive.google.com/file/d/1x1jBXOCDfXvgDJzb__UkOE9WIuWKWvlm/view?usp=sharing
+[Ver PDF](https://drive.google.com/file/d/1x1jBXOCDfXvgDJzb__UkOE9WIuWKWvlm/view?usp=sharing)
 
 ## Proyecto compilado
 1. Extrae la carpeta de juego
 2. Ejecuta mediante game.exe
 
-https://drive.google.com/file/d/15en0YoxYBGy2oD85CURyHBq83kh5F9UG/view?usp=sharing
+[Descargar Juego](https://drive.google.com/file/d/15en0YoxYBGy2oD85CURyHBq83kh5F9UG/view?usp=sharing)
